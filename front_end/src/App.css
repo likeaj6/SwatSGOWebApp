@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+}
+
+.sidemenu {
+    height: 70%;
+}
+
+.App-header {
+  /*background-color: #824c4c;*/
+  height: 40%;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}

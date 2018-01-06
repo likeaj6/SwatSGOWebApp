@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { Loader, Header, Image, Icon, Button, Divider, Container } from 'semantic-ui-react'
-import MainMenu from './Components/MainMenu'
-import SideMenu from './Components/SideMenu'
+import MainMenu from './components/MainMenu'
+import SideMenu from './components/SideMenu'
 import './App.css';
 
 class App extends Component {
@@ -44,6 +44,9 @@ class App extends Component {
             </div>
         );
     }
+
+
 }
+
 
 export default App;

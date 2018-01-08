@@ -1,36 +1,53 @@
-// import React from 'react'
-// import { render } from 'react-dom'
-// import { Provider } from 'react-redux'
-// import { ConnectedRouter } from 'react-router-redux'
-// import Store, { history } from './store/Store'
-// import App from './containers/app'
-//
-// import './index.css'
-//
-// const target = document.querySelector('#root')
-//
-// render(
-//   <Provider store={Store}>
-//     <ConnectedRouter history={history}>
-//       <div>
-//         <App />
-//       </div>
-//     </ConnectedRouter>
-//   </Provider>,
-//   target
-// )
+import React from 'react'
+import { render } from 'react-dom'
+import { ConnectedRouter } from 'react-router-redux'
 
+import configureStore from './store/Store'
+import { Provider } from 'react-redux'
+import Store, { history } from './store/Store'
+import App from './App'
+import Routes from './routes'
 
-
-
-
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import 'semantic-ui-css/semantic.min.css';
-import registerServiceWorker from './registerServiceWorker';
+import './index.css'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const target = document.getElementById('root')
+const store = configureStore()
+
+render(
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <App/>
+        </ConnectedRouter>
+    </Provider>,
+    document.getElementById('root')
+)
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        const NextApp = require('./App').default
+        render(
+            <Provider store={store}>
+                <ConnectedRouter history={history}>
+                    <NextApp />
+                </ConnectedRouter>
+            </Provider>,
+            document.getElementById('root')
+        );
+    });
+    window.store = store;
+}
+
+//
+//
+//
+//
+//
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './index.css';
+// import App from './App';
+// import registerServiceWorker from './registerServiceWorker';
+//
+// ReactDOM.render(<App />, document.getElementById('root'));
+// registerServiceWorker();

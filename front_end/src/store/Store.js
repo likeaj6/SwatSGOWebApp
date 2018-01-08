@@ -26,10 +26,21 @@ const composedEnhancers = compose(
   ...enhancers
 )
 
-const Store = createStore(
-  rootReducer,
-  initialState,
-  composedEnhancers
-)
+const configureStore = () => {
+    const store = createStore(
+      rootReducer,
+      initialState,
+      composedEnhancers
+    )
 
-export default Store
+    if (process.env.NODE_ENV !== "production") {
+        if (module.hot) {
+          module.hot.accept('../modules', () => {
+            store.replaceReducer(rootReducer)
+          })
+        }
+    }
+    return store
+}
+
+export default configureStore

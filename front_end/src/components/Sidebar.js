@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import logo from './logo.svg';
-// import ActionCreators from '../actions'
+// import ActionCreators from '../action
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
-import { Link } from 'react-router-dom'
+import { NavLink, Link} from 'react-router-dom'
 
 import { Dropdown, Icon, Input, Menu, Image } from 'semantic-ui-react'
 
 const menuItems = [
-    {name: 'logo', to:'/', image: logo, header: false, icon: null, content: null},
-    {name: 'home', to: '/', header: true, icon: 'home', content: 'Home',
+    {name: 'logo', to:'/', exact: true, image: logo, header: false, icon: null, content: null},
+    {name: 'home', to: '/', exact: true, header: true, icon: 'home', content: 'Home',
         subMenu: [{name: 'news', to: '/news', icon: 'newspaper', content: 'News'},
         {name: 'apply', to: '/apply', icon: 'wordpress forms', content: 'Apply'},
         {name: 'about', to: '/about', icon: 'info', content: 'About'}] },
@@ -23,7 +23,7 @@ const menuItems = [
 
 const SidebarItem = props => {
     return (
-        <Menu.Item header={props.header} name={props.name} active={props.activeItem === props.name || props.subMenuNames.indexOf(props.activeItem) > -1} {...props.clickable ? { onClick:props.onClick}:{} }>
+        <Menu.Item as={(props.clickable) ? NavLink: Link} exact={(!props.activeHome) && props.name==='home'} to={props.to} header={props.header} name={props.name} >
             {props.image? <Image src={props.image}/>: null}
             {props.icon? <Icon name={props.icon}/>: null}
             {props.content}
@@ -34,36 +34,48 @@ const SidebarItem = props => {
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    selectedSideMenuItem: (to) => push('/' + to)
+    selectedSidebarItem: (to) => {
+        push('/' + to)
+    }
 }, dispatch)
 
 class Sidebar extends Component {
 
     constructor(props) {
         super(props);
+        // this.state = { activeItem: 'home'}
         this.mapMenuItemsToComponent = this.mapMenuItemsToComponent.bind(this);
     }
-    state = { activeItem : 'news'}
+
+    // componentWillReceiveProps(nextProps) {
+    //    // alert(this.props.activeItem)
+    //    this.setState({ activeItem: nextProps.activeItem })
+    //
+    // }
 
     handleItemClick = (e, { name}) => {
         const path = (name === 'home') ? '': name
-        this.props.selectedSideMenuItem(path)
-        e.stopPropagation();
-        this.setState({ activeItem: name })
-        // alert(name)
+        this.props.selectedSidebarItem(path)
+        this.setState({ activeItem: name})
+        // e.stopPropagation();
     }
 
     mapMenuItemsToComponent(menuItem, index) {
-        const { name, header, image, icon, content, subMenu, to } = menuItem
-        const { activeItem } = this.state
+        const { name, header, image, strict, icon, exact, content, subMenu, to } = menuItem
+
+        var currentLink = this.props.path.split('/')
+        var activeHome = false
         var subMenuNames = []
+
         var children = null
         if (subMenu) {
             subMenuNames = subMenu.map(item => item.name)
+            activeHome = currentLink.filter((n) => subMenuNames.includes(n)).length != 0 ? true:false
             children = <Menu.Menu children={subMenu.map(this.mapMenuItemsToComponent)}></Menu.Menu>;
         }
         return (
-            <SidebarItem as={Link} key={index} to={to} image={image} header={header} key={index} icon={icon} index={index} activeItem={this.state.activeItem} clickable={(image == null)} onClick={this.handleItemClick} name={name} subMenuNames={subMenuNames} content={content} children={children}/>
+            // <SidebarItem key={index} strict={strict} exact={exact} to={to} image={image} header={header} icon={icon} index={index} clickable={(image == null)} onClick={this.handleItemClick} name={name} subMenuNames={subMenuNames} content={content} children={children}/>
+            <SidebarItem key={index} {...menuItem} activeHome={activeHome} subMenuNames={subMenuNames} children={children} clickable={(image == null) } onClick={this.handleItemClick}/>
         );
     }
 
@@ -75,9 +87,8 @@ class Sidebar extends Component {
     // }
 
     render() {
-        const { activeItem } = this.state
         return (
-            <Menu fixed="left" vertical color="red" size="medium" style={{ width: '15%',}} items={ menuItems.map(this.mapMenuItemsToComponent)}>
+            <Menu fixed="left" vertical color="red" size="small" style={{ width: '15%',}} items={ menuItems.map(this.mapMenuItemsToComponent)}>
                 </Menu>
         );
     }

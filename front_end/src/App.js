@@ -24,9 +24,12 @@ class App extends Component {
     // }
 
     render() {
+        const {history} = this.props
+        // console.log(history)
+        const path = history.location.pathname
         return (
             <div>
-                <Sidebar/>
+                <Sidebar path={path}/>
                 <Routes/>
             </div>
         );

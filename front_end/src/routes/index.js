@@ -1,5 +1,5 @@
 import React from 'react'
-import { IndexRoute, Route, Link, Redirect } from 'react-router'
+import { Route, Link, Redirect } from 'react-router'
 
 /* containers */
 import Home from '../containers/home'
@@ -13,8 +13,9 @@ const routes = [
     main: () => <Home/>
   },
   { path: '/about',
+    exact: false,
     sidebar: () => <div>apply!</div>,
-    main: () => <About/>
+    main: (props) => <About {...props}/>
   },
   // { path: '/shoelaces',
   //   sidebar: () => <div>shoelaces!</div>,
@@ -27,10 +28,10 @@ const Routes = () => {
         <div className="App">
             {routes.map((route, index) => (
                 <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={route.main}
+                    key={index}
+                    path={route.path}
+                    exact={route.exact}
+                    component={route.main}
                 />
             ))}
         </div>

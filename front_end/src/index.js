@@ -1,7 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { ConnectedRouter } from 'react-router-redux'
-
 import configureStore from './store/Store'
 import { Provider } from 'react-redux'
 import Store, { history } from './store/Store'
@@ -17,7 +16,7 @@ const store = configureStore()
 render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <App/>
+            <App history={history}/>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
@@ -29,7 +28,7 @@ if (module.hot) {
         render(
             <Provider store={store}>
                 <ConnectedRouter history={history}>
-                    <NextApp />
+                    <NextApp history={history}/>
                 </ConnectedRouter>
             </Provider>,
             document.getElementById('root')

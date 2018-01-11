@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Menu, Accordion, Card, Modal, Segment, Embed, List, Label, Loader, Header, Message, Image, Icon, Container, Button, Divider } from 'semantic-ui-react'
+import { Tab, Menu, Accordion, Card, Modal, Segment, Embed, List, Label, Loader, Header, Message, Image, Popup, Icon, Container, Button, Divider } from 'semantic-ui-react'
 import text from './text'
 import committees from './committees'
 
@@ -54,8 +54,8 @@ const CommitteesTab = () => {
 const ExecSegment = () => {
     return (
         <div>
-            <Segment color='red' children={text.ExecboardDescription}/>
-            <Segment color='grey' children={
+            <Segment raised color='red' children={text.ExecboardDescription}/>
+            <Segment raised color='grey' children={
                 <div>
                     {text.ExecboardStructure1}
                     <Segment basic children={<List animated bulleted color='red' items={text.ExecboardPositions}/>}/>
@@ -70,8 +70,8 @@ const ExecSegment = () => {
 const SenateSegment = () => {
     return (
         <div>
-            <Segment color='red' children={text.SenateDescription}/>
-            <Segment color='gray' children={
+            <Segment raised color='red' children={text.SenateDescription}/>
+            <Segment raised color='gray' children={
                 <div>
                     {text.SenateStructure1}
                     <Segment basic children={
@@ -114,7 +114,7 @@ const StructurePanel = [
 const ConstitutionSegment = () => {
     return (
         <div>
-            <Segment color='red' children={text.ConstitutionDescription}/>
+            <Segment raised color='red' children={text.ConstitutionDescription}/>
             <Modal closeIcon scrolling size='fullscreen' trigger={<Button color='red' size='big'>View</Button>}>
                 <Modal.Header>View Constitution</Modal.Header>
                 <Modal.Content style={{height: '100%', width: '100%', margin: 'auto'}}>
@@ -129,7 +129,7 @@ const ConstitutionSegment = () => {
 const BiasResponseSegment = () => {
     return (
         <div>
-            <Segment color='red' children={text.BiasResponseDescription}/>
+            <Segment raised color='red' children={text.BiasResponseDescription}/>
             <Modal closeIcon scrolling size='fullscreen' trigger={<Button color='red' size='big'>View</Button>}>
                 <Modal.Header>View Bias Response</Modal.Header>
                 <Modal.Content style={{height: '100%', width: '100%', margin: 'auto'}}>
@@ -169,8 +169,10 @@ function mapCommitteesToCards(committee, index) {
     return {
         raised: true,
         color: 'red',
-        header: committee.header,
-        description: text.Committees[name].description,
+        extra: <Popup trigger={<div><Button disabled fluid content='Apply'/></div>} content='Currently not accepting applications'/>,
+        key: name,
+        header: <Header textAlign='center'>{committee.header}<Divider/></Header>,
+        description: <Card.Description textAlign='center' style={{color: 'grey', fontSize: '12px', }} content={text.Committees[name].description}/>,
         image: <Image src={images[name+'.png']}/>,
     }
 }
@@ -185,7 +187,7 @@ const CommitteesPanel = [
         content:(
             <div>
                 <Header size='small' block icon textAlign='center' children={text.StandingCommitteesDescription}/>
-                <Card.Group itemsPerRow={4} textAlign='center' stackable doubling items={StandingCommitteeCardItems}/>
+                <Card.Group itemsPerRow={3} textAlign='center' stackable doubling items={StandingCommitteeCardItems}/>
             </div>
         ),
         key: 'standing',
@@ -204,7 +206,7 @@ const CommitteesPanel = [
         content:(
             <div>
                 <Header size='small' block icon textAlign='center' children={text.CollegeCommitteesDescriptions}/>
-                <Card.Group itemsPerRow={4} textAlign='center' stackable doubling items={CollegeCommitteeCardItems}/>
+                <Card.Group itemsPerRow={3} textAlign='center' stackable doubling items={CollegeCommitteeCardItems}/>
             </div>
         ),
         key: 'college',

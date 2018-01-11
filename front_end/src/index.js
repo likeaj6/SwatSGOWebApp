@@ -7,7 +7,7 @@ import Store, { history } from './store/Store'
 import App from './App'
 import Routes from './routes'
 
-import 'semantic-ui-css/semantic.min.css';
+import './semantic/dist/semantic.min.css';
 import './index.css'
 
 const target = document.getElementById('root')

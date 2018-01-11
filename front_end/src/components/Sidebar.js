@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from './logo.svg';
+import logo from '../logo_transparent.svg';
 // import ActionCreators from '../action
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
@@ -25,7 +25,7 @@ const SidebarItem = props => {
     return (
         <Menu.Item as={(props.clickable) ? NavLink: Link} exact={(!props.activeHome) && props.name==='home'} to={props.to} header={props.header} name={props.name} >
             {props.image? <Image src={props.image}/>: null}
-            {props.icon? <Icon name={props.icon}/>: null}
+            {props.icon? <Icon size='large' name={props.icon}/>: null}
             {props.content}
             {props.children}
         </Menu.Item>
@@ -88,7 +88,7 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <Menu fixed="left" vertical color="red" size="small" style={{ width: '15%',}} items={ menuItems.map(this.mapMenuItemsToComponent)}>
+            <Menu fixed="left" vertical color="red" inverted size="small" style={{ width: '15%',}} items={ menuItems.map(this.mapMenuItemsToComponent)}>
                 </Menu>
         );
     }

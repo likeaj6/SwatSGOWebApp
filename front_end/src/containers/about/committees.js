@@ -1,12 +1,12 @@
 var committees = {
     standing: [
-        {name: 'academic', to: '/academic', header: 'Academic Affairs Committee'},
-        {name: 'appointments', to: '/appointments', header: 'Appointments Committee'},
-        {name: 'diversity', to: '/diversity', header: 'Diversity Committee'},
-        {name: 'environmental', to: '/environmental', header: 'Environmental Impact     Committee'},
-        {name: 'organizations', to: '/organizations', header: 'Student Organizations Committee'},
-        {name: 'outreach', to: '/outreach', header: 'Student Outreach Committee'},
-        {name: 'visual', to: '/visual', header: 'Visual and Performing Arts Committee'}],
+        {name: 'academic', to: '/academic', header: 'Academic Affairs'},
+        {name: 'appointments', to: '/appointments', header: 'Appointments'},
+        {name: 'diversity', to: '/diversity', header: 'Diversity'},
+        {name: 'environmental', to: '/environmental', header: 'Environmental Impact'},
+        {name: 'organizations', to: '/organizations', header: 'Student Organizations'},
+        {name: 'outreach', to: '/outreach', header: 'Student Outreach'},
+        {name: 'visual', to: '/visual', header: 'Visual & Performing Arts'}],
     student: [
         {name: 'sbc', to: '/sbc', header: 'Student Budget Committee (SBC)'},
         {name: 'freespeech', to: '/freespeech', header: 'Forum for Free Speech (FFS)'},

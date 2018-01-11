@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "googleapis": "^23.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^2.3.1",
     "history": "^4.7.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -14,8 +16,9 @@
     "react-scripts": "1.0.13",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "semantic-ui": "^2.2.13",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.74.2"
+    "semantic-ui-react": "^0.77.1"
   },
   "scripts": {
     "start": "react-scripts start",

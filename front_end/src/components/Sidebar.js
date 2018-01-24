@@ -12,6 +12,7 @@ const menuItems = [
     {name: 'logo', to:'/', exact: true, image: logo, header: false, icon: null, content: null},
     {name: 'home', to: '/', exact: true, header: true, icon: 'home', content: 'Home',
         subMenu: [{name: 'news', to: '/news', icon: 'newspaper', content: 'News'},
+        {name: 'resources', to: '/resources', icon: 'book', content: 'Resources'},
         {name: 'apply', to: '/apply', icon: 'wordpress forms', content: 'Apply'},
         {name: 'about', to: '/about', icon: 'info', content: 'About'}] },
     {name: 'calendar', to: '/calendar', header: true, icon: 'calendar', content: 'Calendar'},
@@ -88,7 +89,7 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <Menu fixed="left" vertical color="red" inverted size="small" style={{ width: '15%',}} items={ menuItems.map(this.mapMenuItemsToComponent)}>
+            <Menu fixed="left" vertical color="red" stackable inverted size="small" style={{ width: '15%',}} items={ menuItems.map(this.mapMenuItemsToComponent)}>
                 </Menu>
         );
     }

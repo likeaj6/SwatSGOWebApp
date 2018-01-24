@@ -37,7 +37,7 @@ const LegislationTab = () => {
 const CommitteesTab = () => {
     return (
         <Tab.Pane>
-            <Message negative header='Coming soon!' content='Application links to Committees are coming soon!'/>
+            <Message negative header='Coming Soon' content='Application links for Committees are coming soon!'/>
             <Header size='small' block icon textAlign='center'>
                 <Icon name='address book outline' circular />
                 SGO Committees
@@ -96,13 +96,13 @@ const SenateSegment = () => {
 
 
 const StructurePanel = [
-    {title: 'Executive Board', content: {
+    {title: 'Executive Board', index: 0, content: {
         content:(
             <ExecSegment/>
         ),
         key: 'exec2',
     }},
-    {title: 'Senate', content: {
+    {title: 'Senate', index: 1, content: {
         content:(
             <SenateSegment/>
         ),
@@ -141,13 +141,13 @@ const BiasResponseSegment = () => {
 }
 
 const LegislationPanel = [
-    {title: 'Constitution', content: {
+    {title: 'Constitution',  index: 0, content: {
         content:(
             <ConstitutionSegment/>
         ),
         key: 'exec2',
     }},
-    {title: 'Bias Response', content: {
+    {title: 'Bias Response',  index: 1, content: {
         content:(
             <BiasResponseSegment/>
         ),
@@ -183,7 +183,7 @@ const CollegeCommitteeCardItems = committees.college.map(mapCommitteesToCards)
 
 
 const CommitteesPanel = [
-    {title: 'Standing Committees', content: {
+    {title: 'Standing Committees',  index: 0, content: {
         content:(
             <div>
                 <Header size='small' block icon textAlign='center' children={text.StandingCommitteesDescription}/>
@@ -192,7 +192,7 @@ const CommitteesPanel = [
         ),
         key: 'standing',
     }},
-    {title: 'Student Committees', content: {
+    {title: 'Student Committees',  index: 1, content: {
         content:(
             <div>
                 <Header size='small' block icon textAlign='center' children={text.StudentCommitteesDescription}/>
@@ -202,7 +202,7 @@ const CommitteesPanel = [
         key: 'student',
 
     }},
-    {title: 'College Committees', content: {
+    {title: 'College Committees',  index: 2, content: {
         content:(
             <div>
                 <Header size='small' block icon textAlign='center' children={text.CollegeCommitteesDescriptions}/>

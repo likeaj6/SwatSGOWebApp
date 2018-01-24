@@ -1,34 +1,30 @@
 import React, { Component } from 'react';
 import {Menu, List, Loader, Header, Icon, Divider, Container } from 'semantic-ui-react'
-import { StructureTab, LegislationTab, CommitteesTab } from './tabPanes'
+import { ExecboardTab, SenateTab, CommitteesTab } from './MembersPanes'
 import { Route, Redirect } from 'react-router'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-
-
-
 const panes = [
         {
-        menuItem: <Menu.Item as={NavLink} to='/about/structure' key='structure' ><Icon name='university'/>Structure</Menu.Item>,
-        pane: <StructureTab/>,
-        key: 'structure'
+        menuItem: <Menu.Item as={NavLink} to='/members/execboard' key='structure' ><Icon name='university'/>Executive Board</Menu.Item>,
+        key: 'execboard',
+        pane: <ExecboardTab/>
         },
         {
-        menuItem: <Menu.Item as={NavLink} to='/about/legislation' key='legislation'><Icon name='book'/>Legislation</Menu.Item>,
-        pane: <LegislationTab/>,
-        key: 'legislation'
+        menuItem: <Menu.Item as={NavLink} to='/members/senate' key='legislation'><Icon name='book'/>Senate</Menu.Item>,
+        key: 'senate',
+        pane: <SenateTab/>
         },
         {
-        menuItem: <Menu.Item as={NavLink} to='/about/committees' key='committees'><Icon name='address book outline'/>Committees</Menu.Item>,
-        pane: <CommitteesTab/>,
+        menuItem: <Menu.Item as={NavLink} to='/members/committees' key='committees'><Icon name='address book outline'/>Committees</Menu.Item>,
         key: 'committees'
     },
 ]
 
-const AboutTab = (props) => {
+const MembersTab = (props) => {
     const tabContent = panes.filter(tab => tab.key === props.match.params.id).pop()
     const hasTab = (tabContent != null)
     return (
@@ -44,11 +40,8 @@ const AboutTab = (props) => {
 
 }
 
-// const mapDispatchToProps = dispatch => bindActionCreators({
-//     selectedTabItem: (item) => push(item)
-// }, dispatch)
 
-class About extends Component {
+class Members extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -63,8 +56,6 @@ class About extends Component {
                 loading: false
             })
         }, 300)
-        //   .then(res => res.json())
-        //   .then(users => this.setState({ users }));
     }
 
     render() {
@@ -72,7 +63,7 @@ class About extends Component {
         const {match} = this.props
         // console.log(this.panes)
         // const tabPanes = panes
-        // console.log(AboutTab)
+        // console.log(ResourcesTab)
         var content;
         if (loading) {
              content = <div><Loader active={loading}>
@@ -80,16 +71,16 @@ class About extends Component {
                 <p>We are fetching that content for you.</p>
             </Loader></div>
         } else {
-            content = <div><Route path={`${match.url}/:id`} component={(props, panes) => <AboutTab {...props} />}/>
+            content = <div><Route path={`${match.url}/:id`} component={(props, panes) => <MembersTab {...props} />}/>
             <Route exact path={match.url} render={() => (
-                <Redirect to={`${match.url}/structure`}/>
+                <Redirect to={`${match.url}/execboard`}/>
             )}/>
             </div>
         }
         return (
             <div>
                 <div className="App-header">
-                    <Header size='huge'>About SGO</Header>
+                    <Header size='huge'>Members</Header>
                     <Divider/>
                 </div>
                 <div className="App-intro">
@@ -99,8 +90,7 @@ class About extends Component {
             </div>
         );
     }
+
 }
 
-export default connect(
-    null,
-)(About)
+export default Members

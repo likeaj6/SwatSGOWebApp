@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.13 - Header
+ * # Semantic UI 2.2.14 - Header
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -323,13 +323,13 @@ h5.ui.header .sub.header {
 /*--- Red ---*/
 
 .ui.red.header {
-  color: #DB2828 !important;
+  color: #7a4344 !important;
 }
 a.ui.red.header:hover {
-  color: #d01919 !important;
+  color: #6c3839 !important;
 }
 .ui.red.dividing.header {
-  border-bottom: 2px solid #DB2828;
+  border-bottom: 2px solid #7a4344;
 }
 
 /* Inverted */

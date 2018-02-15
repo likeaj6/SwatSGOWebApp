@@ -5,6 +5,7 @@ var committees = {
         {name: 'diversity', to: '/diversity', header: 'Diversity'},
         {name: 'environmental', to: '/environmental', header: 'Environmental Impact'},
         {name: 'organizations', to: '/organizations', header: 'Student Organizations'},
+        {name: 'life', to: '/life', header: 'Student Life'},
         {name: 'outreach', to: '/outreach', header: 'Student Outreach'},
         {name: 'visual', to: '/visual', header: 'Visual & Performing Arts'}],
     student: [

@@ -26,7 +26,7 @@ const SenateTab = () => {
             </Header>
             <br/>
             <Header content='At-Large Senators'/>
-            <Card.Group itemsPerRow={6} items={SenateAtLargeCardItems}/>
+            <Card.Group items={SenateAtLargeCardItems}/>
             <Divider/>
             <Header content='2018 Senators'/>
             <Card.Group items={Senate2018CardItems}/>
@@ -78,7 +78,7 @@ function mapMembersToCards(member, index) {
         extra: <div><Button href={'mailto:' + member.email} fluid content='Contact'/></div>,
         key: committee,
         description: <Card.Description textAlign='center' content={member.title}/>,
-        image: <Image style={{width: '21rem', height:'24rem'}} src={images[committee+'.jpg']}/>,
+        image: <Image style={{width: '24.5rem', height:'28rem'}} src={images[committee+'.jpg']}/>,
         header: <Header textAlign='center'>{name}<Divider/></Header>,
     }
 }

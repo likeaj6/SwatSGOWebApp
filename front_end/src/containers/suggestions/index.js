@@ -5,21 +5,21 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
+import swal from 'sweetalert2'
 
 const SuggestionsForm = (props) => {
+    const {handleSubmit, handleChange, name, note, email} = props
+
     return (
         <div>
-            <Header textAlign='center' content='Write us a note or suggestion!'/>
-            <Segment>
-            <Form onSubmit={props.handleSubmit}>
-                <Form.Group>
-                    <Form.Input placeholder='Name' name='name' value={props.name} onChange={props.handleChange} />
-                    <Form.Input placeholder='Email' name='email' value={props.email} onChange={props.handleChange} />
-                </Form.Group>
-                <Form.TextArea required placeholder='Note' name='note' value={props.note} onChange={props.handleChange} />
-                <Form.Button content='Submit' />
-            </Form>
-            </Segment>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group>
+                <Form.Input label='Name' width={4} placeholder='Name' name='name' value={name} onChange={handleChange} />
+                <Form.Input label='Email' width={4} placeholder='...@swarthmore.edu' name='email' value={email} onChange={handleChange} />
+            </Form.Group>
+            <Form.TextArea label='Note' required placeholder='Note' name='note' value={note} onChange={handleChange} />
+            <Form.Button content='Submit' />
+        </Form>
         </div>
     );
 }
@@ -33,12 +33,14 @@ class Suggestions extends Component {
 
     }
 
-    handleChange = (e, { name, value }) => this.setState({ [name]: value })
+    handleChange = (e, { name, value }) => {
+        this.setState({ [name]: value })
+    }
 
     handleSubmit = () => {
         const { name, email, note} = this.state
-        alert(note)
         this.setState({ submittedName: name, submittedEmail: email, submittedNote: note })
+        swal({title:"Thank you!", text:"Your note has been submitted!", type:"success"})
     }
 
     componentDidMount() {
@@ -47,11 +49,12 @@ class Suggestions extends Component {
             this.setState({
                 loading: false
             })
-        }, 300)
+        }, 10)
     }
 
     render() {
-        const {loading, feed} = this.state
+        const {loading, name, note, email} = this.state
+        const formProps = {name, note, email, handleChange: this.handleChange, handleSubmit: this.handleSubmit}
         const {match} = this.props
         // console.log(this.panes)
         // const tabPanes = panes
@@ -63,8 +66,12 @@ class Suggestions extends Component {
                 <p>We are fetching that content for you.</p>
             </Loader></div>
         } else {
-            content = <div><Route path={`${match.url}`} component={(props, panes) => <SuggestionsForm {...props} />}/>
-            </div>
+            content = <div><Segment secondary><Header as='h3' textAlign='center' content={'Have a suggestion or issue for us?'}/>
+            <Segment tertiary  as='h4' textAlign='center' content={'Send us a note here, and we\'ll do our best to address it as soon as possible! If you want us to get back in touch with you, please enter your email as well.'} />
+            <Segment>
+                <SuggestionsForm {...formProps}/>
+            </Segment>
+            </Segment></div>
         }
         return (
             <div>
@@ -72,7 +79,7 @@ class Suggestions extends Component {
                     <Header size='huge'>Suggestions Box</Header>
                     <Divider/>
                 </div>
-                <div className="App-intro">
+                <div className="App-intro" style={{marginTop: '7rem'}}>
                     {content}
                 </div>
 

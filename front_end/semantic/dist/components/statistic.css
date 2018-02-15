@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.13 - Statistic
+ * # Semantic UI 2.2.14 - Statistic
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -320,7 +320,7 @@
 .ui.red.statistics .statistic > .value,
 .ui.statistics .red.statistic > .value,
 .ui.red.statistic > .value {
-  color: #DB2828;
+  color: #7a4344;
 }
 .ui.orange.statistics .statistic > .value,
 .ui.statistics .orange.statistic > .value,

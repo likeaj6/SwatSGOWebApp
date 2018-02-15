@@ -57,12 +57,11 @@ class About extends Component {
     }
 
     componentDidMount() {
-        fetch('/')
         setTimeout(() => {
             this.setState({
                 loading: false
             })
-        }, 300)
+        }, 10)
         //   .then(res => res.json())
         //   .then(users => this.setState({ users }));
     }

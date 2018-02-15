@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.13 - Message
+ * # Semantic UI 2.2.14 - Message
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -353,11 +353,11 @@
 }
 .ui.red.message {
   background-color: #FFE8E6;
-  color: #DB2828;
-  box-shadow: 0px 0px 0px 1px #DB2828 inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  color: #7a4344;
+  box-shadow: 0px 0px 0px 1px #7a4344 inset, 0px 0px 0px 0px rgba(0, 0, 0, 0);
 }
 .ui.red.message .header {
-  color: #c82121;
+  color: #6a3a3b;
 }
 .ui.orange.message {
   background-color: #FFEDDE;

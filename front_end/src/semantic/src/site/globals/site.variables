@@ -1,3 +1,22 @@
 /*******************************
      User Global Variables
 *******************************/
+
+
+@gold             : #C0B283;
+@rose             : #DCD0C0;
+@primaryColor : @blue;
+@secondaryColor : @grey;
+
+@darkTextColor               : #373737;
+@mutedTextColor              : rgba(0, 0, 0, 0.6);
+@lightTextColor              : rgba(0, 0, 0, 0.4);
+
+@unselectedTextColor         : rgba(0, 0, 0, 0.4);
+@hoveredTextColor            : #F4F4F4;
+@pressedTextColor            : rgba(0, 0, 0, 0.9);
+@selectedTextColor           : rgba(0, 0, 0, 0.95);
+@disabledTextColor           : rgba(0, 0, 0, 0.2);
+
+@highlightBackground      : #CCE2FF;
+@highlightColor           : @textColor;

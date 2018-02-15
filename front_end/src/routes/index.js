@@ -7,6 +7,7 @@ import About from '../containers/about'
 import Contact from '../containers/contact'
 import Calendar from '../containers/calendar'
 import Resources from '../containers/resources'
+import Apply from '../containers/apply'
 import Members from '../containers/members'
 import Suggestions from '../containers/suggestions'
 
@@ -46,10 +47,11 @@ const routes = [
     sidebar: () => <div>Suggestions</div>,
     main: (props) => <Suggestions {...props}/>
   },
-  // { path: '/shoelaces',
-  //   sidebar: () => <div>shoelaces!</div>,
-  //   main: () => <h2>Shoelaces</h2>
-  // }
+  { path: '/apply',
+    exact: false,
+    sidebar: () => <div>sApply</div>,
+    main: (props) => <Apply {...props} />
+  }
 ]
 
 const Routes = () => {

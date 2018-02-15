@@ -50,12 +50,12 @@ class Members extends Component {
     }
 
     componentDidMount() {
-        fetch('/')
+        // fetch('/')
         setTimeout(() => {
             this.setState({
                 loading: false
             })
-        }, 300)
+        }, 10)
     }
 
     render() {

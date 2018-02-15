@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Menu, List, Loader, Header, Icon, Divider, Container } from 'semantic-ui-react'
-import { GroupsTab, BudgetingTab, EventPlanningTab } from './tabPanes'
+import { GroupsTab, CharteringTab, ReimbursementTab, SBCTab, BudgetingTab, EventPlanningTab } from './tabPanes'
 import { Route, Redirect } from 'react-router'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
@@ -12,12 +12,24 @@ import { connect } from 'react-redux'
 
 const panes = [
         {
-        menuItem: <Menu.Item as={NavLink} to='/resources/student-groups' key='student-groups' ><Icon name='university'/>Student Groups</Menu.Item>,
+        menuItem: <Menu.Item as={NavLink} to='/resources/student-groups' key='student-groups' ><Icon name='users'/>Student Groups</Menu.Item>,
         pane: <GroupsTab/>,
         key: 'student-groups'
         },
         {
-        menuItem: <Menu.Item as={NavLink} to='/resources/budgeting' key='budgeting'><Icon name='book'/>Budgeting</Menu.Item>,
+        pane: <CharteringTab/>,
+        key: 'chartering'
+        },
+        {
+        pane: <ReimbursementTab/>,
+        key: 'reimbursement'
+        },
+        {
+        pane: <SBCTab/>,
+        key: 'sbc'
+        },
+        {
+        menuItem: <Menu.Item as={NavLink} to='/resources/budgeting' key='budgeting'><Icon name='bitcoin'/>Budgeting</Menu.Item>,
         pane: <BudgetingTab/>,
         key: 'budgeting'
         },
@@ -58,12 +70,12 @@ class Resources extends Component {
     }
 
     componentDidMount() {
-        fetch('/')
+        // fetch('/')
         setTimeout(() => {
             this.setState({
                 loading: false
             })
-        }, 300)
+        }, 10)
     }
 
     render() {

@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.13 - Segment
+ * # Semantic UI 2.2.14 - Segment
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -506,10 +506,10 @@
 
 /* Red */
 .ui.red.segment:not(.inverted) {
-  border-top: 2px solid #DB2828 !important;
+  border-top: 2px solid #7a4344 !important;
 }
 .ui.inverted.red.segment {
-  background-color: #DB2828 !important;
+  background-color: #7a4344 !important;
   color: #FFFFFF !important;
 }
 

@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.13 - Site
+ * # Semantic UI 2.2.14 - Site
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -102,11 +102,11 @@ p:last-child {
 --------------------*/
 
 a {
-  color: #4183C4 !important;
+  color: #4183C4;
   text-decoration: none;
 }
 a:hover {
-  color: #1e70bf !important;
+  color: #1e70bf;
   text-decoration: none;
 }
 
@@ -157,6 +157,7 @@ input::selection {
 body ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 10px;
+  height: 10px;
 }
 body ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
@@ -200,3 +201,4 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
 /*******************************
          Site Overrides
 *******************************/
+

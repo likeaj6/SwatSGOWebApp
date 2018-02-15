@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.2.13 - Comment
+ * # Semantic UI 2.2.14 - Comment
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -163,7 +163,7 @@
 }
 .ui.comments .comment .actions a.active,
 .ui.comments .comment .actions a:hover {
-  color: rgba(0, 0, 0, 0.8);
+  color: #F4F4F4;
 }
 
 /*--------------------
@@ -206,7 +206,8 @@
 .ui.threaded.comments .comment .comments {
   margin: -1.5em 0 -1em 1.25em;
   padding: 3em 0em 2em 2.25em;
-  box-shadow: -1px 0px 0px rgba(34, 36, 38, 0.15);
+  -webkit-box-shadow: -1px 0px 0px rgba(34, 36, 38, 0.15);
+          box-shadow: -1px 0px 0px rgba(34, 36, 38, 0.15);
 }
 
 /*--------------------
@@ -220,7 +221,7 @@
   right: 0px;
   left: auto;
   -webkit-transition: opacity 0.2s ease;
-          transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
   -webkit-transition-delay: 0.1s;
           transition-delay: 0.1s;
 }

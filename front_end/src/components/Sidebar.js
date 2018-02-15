@@ -11,10 +11,12 @@ import { Dropdown, Icon, Input, Menu, Image } from 'semantic-ui-react'
 const menuItems = [
     {name: 'logo', to:'/', exact: true, image: logo, header: false, icon: null, content: null},
     {name: 'home', to: '/', exact: true, header: true, icon: 'home', content: 'Home',
-        subMenu: [{name: 'news', to: '/news', icon: 'newspaper', content: 'News'},
-        {name: 'resources', to: '/resources', icon: 'book', content: 'Resources'},
-        {name: 'apply', to: '/apply', icon: 'wordpress forms', content: 'Apply'},
-        {name: 'about', to: '/about', icon: 'info', content: 'About'}] },
+        subMenu: [
+            // {name: 'news', to: '/news', icon: 'newspaper', content: 'News'},
+            {name: 'resources', to: '/resources', icon: 'book', content: 'Resources'},
+            {name: 'apply', to: '/apply', icon: 'wordpress forms', content: 'Apply'},
+            {name: 'about', to: '/about', icon: 'info', content: 'About'}
+        ] },
     {name: 'calendar', to: '/calendar', header: true, icon: 'calendar', content: 'Calendar'},
     {name: 'members', to: '/members', header: true, icon: 'users', content: 'Members'},
     {name: 'contact', to: '/contact', header: true, icon: 'talk outline', content: 'Contact'},

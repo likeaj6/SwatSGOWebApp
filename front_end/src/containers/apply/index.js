@@ -40,7 +40,6 @@ class Home extends Component {
             <div>
                 <div className="App-header">
                     <Header textAlign='center' size='huge'>Apply</Header>
-                    <br/>
                     <Divider/>
                 </div>
                 <div className="App-intro" style={{marginTop: '7rem'}}>

@@ -80,7 +80,7 @@ class Members extends Component {
         return (
             <div>
                 <div className="App-header">
-                    <Header size='huge'>Members</Header>
+                    <Header textAlign='center' size='huge'>Members</Header>
                     <Divider/>
                 </div>
                 <div className="App-intro">

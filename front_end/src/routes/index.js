@@ -49,7 +49,7 @@ const routes = [
   },
   { path: '/apply',
     exact: false,
-    sidebar: () => <div>sApply</div>,
+    sidebar: () => <div>Apply</div>,
     main: (props) => <Apply {...props} />
   }
 ]

@@ -88,7 +88,7 @@ class About extends Component {
         return (
             <div>
                 <div className="App-header">
-                    <Header size='huge'>About SGO</Header>
+                    <Header textAlign='center' size='huge'>About SGO</Header>
                     <Divider/>
                 </div>
                 <div className="App-intro">

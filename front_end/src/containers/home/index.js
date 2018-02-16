@@ -40,11 +40,11 @@ class Home extends Component {
             <div>
                 <div className="App-header">
                     <Header textAlign='center' size='huge'>Dashboard</Header>
-                    <br/>
                     <Divider/>
-
                 </div>
-                {content}
+                <div style={{marginTop:'3%'}}>
+                    {content}
+                </div>
             </div>
         );
     }

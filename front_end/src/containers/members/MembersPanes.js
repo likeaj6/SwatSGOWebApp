@@ -12,7 +12,7 @@ const ExecboardTab = () => {
                 Executive Board
             </Header>
             <br/>
-                <Card.Group itemsPerRow={5} items={ExecMembersCardItems}/>
+                <Card.Group items={ExecMembersCardItems}/>
             <br/>
          </Tab.Pane>
     );
@@ -78,7 +78,7 @@ function mapMembersToCards(member, index) {
         extra: <div><Button href={'mailto:' + member.email} fluid content='Contact'/></div>,
         key: committee,
         description: <Card.Description textAlign='center' content={member.title}/>,
-        image: <Image style={{width: '24.5rem', height:'28rem'}} src={images[committee+'.jpg']}/>,
+        image: <Image src={images[committee+'.jpg']}/>,
         header: <Header textAlign='center'>{name}<Divider/></Header>,
     }
 }

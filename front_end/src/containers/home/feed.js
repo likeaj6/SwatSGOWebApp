@@ -95,7 +95,20 @@ const generalCards = [
     // <Header as='h3' color='red' textAlign='center' icon><Icon name='info'/><Header.Content content='General'/></Header>
 
 class Feed extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { isMobile: window.innerWidth <= 760}
+    }
+    componentDidMount() {
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
+    }
+
+    resize() {
+        this.setState({isMobile: window.innerWidth <= 760});
+    }
     render() {
+        const {isMobile} = this.state
         const featured = featuredCards.length > 0 ? <Grid.Row> {featuredCards.map(mapItemsToCards)}</Grid.Row> : null
 
         return (
@@ -103,18 +116,18 @@ class Feed extends Component {
                 <Grid centered relaxed stretched divided container>
 
                     {featured}
-                    <Segment.Group piled horizontal>
-                        <Label as='a' icon='university' color='red' ribbon>Overview</Label>
+                    <Segment.Group piled horizontal={!isMobile}>
+                        <Label as='a' icon='university' color='red' ribbon>General</Label>
                         {actionCards.map(mapItemsToCards)}
                     </Segment.Group>
 
-                    <Segment.Group piled horizontal>
+                    <Segment.Group piled horizontal={!isMobile}>
                         <Label as='a' color='green' ribbon>SBC</Label>
                         {fundingCards.map(mapItemsToCards)}
                         </Segment.Group>
 
-                    <Segment.Group piled horizontal>
-                        <Label as='a' color='grey' ribbon>General</Label>
+                    <Segment.Group piled horizontal={!isMobile}>
+                        <Label as='a' color='grey' ribbon>Misc</Label>
                         {generalCards.map(mapItemsToCards)}
                     </Segment.Group>
                 </Grid>

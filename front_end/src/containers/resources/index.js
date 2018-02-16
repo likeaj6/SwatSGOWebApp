@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Menu, List, Loader, Header, Icon, Divider, Container } from 'semantic-ui-react'
-import { GroupsTab, CharteringTab, ReimbursementTab, SBCTab, BudgetingTab, EventPlanningTab } from './tabPanes'
+import { GroupsTab, CharteringTab, ReimbursementTab, BudgetingTab, EventPlanningTab } from './tabPanes'
+import SBCTab from './SBCTab'
+import FundingTab from './FundingTab'
 import { Route, Redirect } from 'react-router'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
@@ -29,6 +31,10 @@ const panes = [
         key: 'sbc'
         },
         {
+        pane: <FundingTab/>,
+        key: 'funding'
+        },
+        {
         menuItem: <Menu.Item as={NavLink} to='/resources/budgeting' key='budgeting'><Icon name='bitcoin'/>Budgeting</Menu.Item>,
         pane: <BudgetingTab/>,
         key: 'budgeting'
@@ -45,7 +51,7 @@ const ResourcesTab = (props) => {
     const hasTab = (tabContent != null)
     return (
         <div>
-            <Menu color='red' pointing>
+            <Menu color='red' pointing stackable>
                 {panes.map((tab, index) => {
                     return tab.menuItem
                 })}
@@ -100,7 +106,7 @@ class Resources extends Component {
         return (
             <div>
                 <div className="App-header">
-                    <Header size='huge'>Resources</Header>
+                    <Header textAlign='center' size='huge'>Resources</Header>
                     <Divider/>
                 </div>
                 <div className="App-intro">

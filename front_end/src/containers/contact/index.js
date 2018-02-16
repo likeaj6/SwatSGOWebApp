@@ -93,10 +93,10 @@ class Contact extends Component {
         return (
             <div>
                 <div className="App-header">
-                    <Header size='huge'>Contact Us</Header>
+                    <Header size='huge' textAlign='center'>Contact Us</Header>
                     <Divider />
                 </div>
-                <div className="App-intro" style={{marginTop: '7rem'}}>
+                <div className="App-intro" style={{marginTop: '5%'}}>
                     {content}
                 </div>
             </div>

@@ -4,22 +4,24 @@ import text from './text'
 import links from './links'
 import committees from './committees'
 import CharteringPanel from './CharteringPanel'
+import EventPlanningPanel from './EventPlanningPanel'
 
 import { NavLink, Link} from 'react-router-dom'
 
 function mapItemsToCards(item, index) {
     const {header, text, action, link, to, height} = item
+    var as = to == null ? 'a':NavLink
     var cardHeight = height == null ? '17rem':height
     return (
         <Segment>
             <Card
                 fluid
-                style={{height: cardHeight}}
-                as={NavLink}
+                as={as}
+                href={link}
                 to={to}
                 raised
                 color='red'
-                extra={<Button attached='bottom' as={NavLink} color='red' to={to} content={action}/>}
+                extra={<Button attached='bottom' as={as} color='red' to={to} href={link} content={action}/>}
                 key={index}
                 description={<Card.Description textAlign='center' content={text}/>}
                 header={<Header textAlign='center'>{header}<Divider/></Header>}
@@ -210,127 +212,18 @@ class BudgetingPanel extends Component {
     }
 }
 
-const SBCItems = [
-    {
-        header: 'Request For Reimbursement/Payment',
-        to: '/resources/reimbursement',
-        action: 'View Form',
-        text: text.SBC.Reimbursement,
-    },
-    {
-        header: 'Request Supplementary Funding',
-        to: '/resources/sbc',
-        action: 'View Funding Request Form',
-        text: text.SBC.SupplementalFunding,
-    },
-    {
-        header: 'Authorize Non-Treasurer',
-        to: '/resources/sbc',
-        action: 'View Authorization Form',
-        text: text.SBC.NonTreasurerAuthorization,
-    },
-]
-
-const SBCDocuments = [
-    {
-        header: 'SBC Bylaws',
-        to: '/resources/reimbursement',
-        action: 'View Bylaws',
-        text: text.SBC.ByLaws,
-        height: '13rem'
-    },
-    {
-        header: 'Treasuring 101',
-        to: '/resources/sbc',
-        action: 'View Document',
-        text: text.SBC.Treasuring101,
-        height: '13rem'
-    },
-    {
-        header: 'Treasurer Agreement',
-        to: '/resources/sbc',
-        action: 'View Agreement',
-        text: text.SBC.TreasurerAgreement,
-        height: '13rem'
-    },
-]
-
-function printTimes(item, index) {
-    return <div>
-    {item}
-    </div>
-}
-
-class SBCTab extends Component {
-    state = { modalOpen: false }
-
-    handleOpen = () => this.setState({ modalOpen: true })
-
-    handleClose = () => this.setState({ modalOpen: false })
-
-    render() {
-        return (
-        <div>
-        <Segment>
-            <Header size='small' block icon textAlign='center'>
-                <Icon name='money' circular />
-                Student Budgeting Committee
-            </Header>
-            <Divider/>
-            <Segment>
-                <Header as='h4' content={text.SBCDescription} textAlign='center'/>
-                <Segment>
-
-                    <Segment.Group piled stackable compact horizontal size='small' >
-                        <Segment compact>
-                        <Header as='h4' content='Contact:'
-                        textAlign='center'/>
-                        <Divider/>
-                        <Button fluid content='Email Us' href={'mailto:'+text.SBC.Email}/>
-                        </Segment>
-                        <Segment compact>
-                        <Header as='h4' content='Meeting:' textAlign='center'/>
-                        <Divider/>
-                        <p style={{textAlign:'center'}}><b>{text.SBC.MeetingLocation}</b></p>
-                        <Divider/>
-                        <p style={{textAlign:'center'}}>{text.SBC.MeetingTime}</p>
-                        </Segment>
-                        <Segment compact>
-                        <Header as='h4' content='Office Hours:' textAlign='center'/>
-                        <Divider/>
-                        <p style={{textAlign:'center'}}><b>{text.SBC.OfficeHoursLocation}</b></p>
-                        <Divider/>
-                        <p style={{textAlign:'center'}}>{text.SBC.OfficeHoursTime.map(printTimes)}</p>
-                        </Segment>
-                    </Segment.Group>
-                </Segment>
-            </Segment>
-            <Header content='What would you like to do?' textAlign='center' />
-            <Segment.Group piled stackable horizontal>
-                {SBCItems.map(mapItemsToCards)}
-            </Segment.Group>
-            <Header content='Other resources:' textAlign='center' />
-            <Segment.Group piled stackable horizontal >
-                {SBCDocuments.map(mapItemsToCards)}
-            </Segment.Group>
-        </Segment>
-        </div>
-        )
-    }
-}
-
 function mapReimbursementStepsToComponent(step, index) {
-    const { key, icon, description, actions, title, link, height, style } = step
-    var cardHeight = height == null ? '24rem':height
+    const { key, icon, description, actions, title, link, style } = step
+    // var cardHeight = height == null ? '24rem':height
+    // var cardWidth = width == null ? '15rem':width
     var buttons = []
     actions.forEach((action, key) => {
-        buttons.push(<Button href={'mailto:jjin3@swarthmore.edu'} attached='bottom' color='red' content={action}/>)
+        buttons.push(<Button as='a' href={link[key]} attached='bottom' color='red' content={action}/>)
     })
     return (
         <Segment>
             <Card
-                fluid
-                style={{height: cardHeight, width: '15rem'}}
+                className='StepCards'
                 raised
                 color='red'
                 extra={buttons}
@@ -352,7 +245,7 @@ const ReimbursementSteps = [
         },
         description: 'Download the general payment form below.',
         actions: ['Download Form'],
-        link: links.reimbursementForm,
+        link: [links.reimbursementForm],
         index: '0'
     },
     {
@@ -365,7 +258,7 @@ const ReimbursementSteps = [
         description: 'Use the Subcodes and Club & Organization Numbers linked below.',
         actions: ['Subcodes', 'Club & Org Numbers'],
         to: '/resources/chartering',
-        link: true,
+        link: [links.subCodes, links.clubNumbers],
         index: '1'
     },
     {
@@ -404,87 +297,80 @@ const ReimbursementSteps = [
         index: '4'
     },
 ]
+const ServicePaymentSteps = [
+    {
+        key: 'download',
+        icon: 'users',
+        title: '1. Complete steps 1-3 above',
+        width: '19em',
+        description: 'Please note that we use the same form for reimbursements and service payments. Instead of receipts, you must submit an invoice or other documents detailing the payment amount.',
+        actions: ['Download Form'],
+        link: [links.reimbursementForm],
+        index: '0'
+    },
+    {
+        key: 'format',
+        icon: 'dollar',
+        title: '2. Title your form',
+        to: '/resources/funding',
+        description: 'Title your PDF file in the following format: "[your payee\'s name]([your student group\'s name])". For example, "Manager_XYZ(SBC)"',
+        width: '19em',
+        actions: [],
+        link: true,
+        index: '3'
+    },
+    {
+        key: 'format',
+        icon: 'dollar',
+        title: '3. Fill out & Sign Instructor Contract',
+        to: '/resources/funding',
+        description: 'Ask your payee to sign the Contract. Please note that you are required to submit this document for different and new payees regardless of whether or not you have submitted a similar document in the past. You do not need to submit the contract again when you request service payment for the same payee.',
+        width: '19em',
+        actions: [],
+        link: true,
+        index: '3'
+    },
+    {
+        key: 'send',
+        icon: 'currency',
+        title: '4. Send It!',
+        width: '19em',
+        to: '/resources/sbc',
+        actions: [],
+        description: 'Send the Contract and the PDF file, which contains both the form and invoice, to Office via email swarthmoresbc@gmail.com. Please note that they should be 2 separate files.',
+        link: true,
+        index: '4'
+    },
+]
 
-const ReimbursementTab = () => {
-    return (
-        <div>
-            <Segment content='Please follow the below instructions and send us ALL payment requests via email unless specified otherwise. If you have any concerns about submitting your files online, please contact us in advance. We will only accept payment requests during office hours in situations where prompt SBC actions are deemed to be necessary.'/>
-            <Header as='h2' content='Reimbursement Process' textAlign='center' />
-            <Segment.Group stackable horizontal>
-                {ReimbursementSteps.map(mapReimbursementStepsToComponent)}
-            </Segment.Group>
-            <Header as='h2' content='Service Payment Process' textAlign='center' />
-        </div>
-    )
-}
+class ReimbursementTab extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { isMobile: window.innerWidth <= 760}
+    }
+    componentDidMount() {
+        window.addEventListener("resize", this.resize.bind(this));
+        this.resize();
+    }
 
-class EventPlanningPanel extends Component {
+    resize() {
+        this.setState({isMobile: window.innerWidth <= 760});
+    }
     render() {
+        const {isMobile} = this.state
         return (
             <div>
-                <Segment.Group attached='top' stackable vertical>
-                    <Segment>
-                        <Header content='1. Planning' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal>
-                            <Segment textAlign='center'>
-                                {text.EventPlanningSteps.Planning}
-                            </Segment>
-                            <Segment>
-                                <Button color='red' href={links.osegraphicdesign} content='Graphic Design Help'/>
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment>
-                        <Header content='2. Funding & Services' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal>
-                            <Segment textAlign='center'>
-                            {text.EventPlanningSteps.Funding}
-                            </Segment>
-                            <Segment>
-                            <Button.Group vertical fluid>
-                                <Button color='red' href={links.osefunding} content='OSE Funding Request'/>
-                                <Button.Or />
-                                <Button color='red' href={links.sgofunding} content='SGO Funding Request'/>
-                            </Button.Group>
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment>
-                        <Header content='3. Review' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal>
-                            <Segment textAlign='center'>
-                                {text.EventPlanningSteps.Review}
-                            </Segment>
-                            <Segment>
-                                <Button color='red' href={links.oseinterns} content='OSE Intern Info'/>
-                            </Segment>
-                        </Segment.Group>
-
-                    </Segment>
-                    <Segment>
-                        <Header content='4. Reserve Space' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal>
-                            <Segment textAlign='center'>
-                                {text.EventPlanningSteps.Reserve}
-                            </Segment>
-                            <Segment>
-                                <Button fluid color='red' href={links.reserve} content='Reserve Space'/>
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment textAlign='center'>
-                        <Header content='5. Enjoy!' textAlign='center' />
-                        <Divider/>
-                        {text.EventPlanningSteps.Enjoy}
-                    </Segment>
+                <Segment content='Please follow the below instructions and send us ALL payment requests via email unless specified otherwise. If you have any concerns about submitting your files online, please contact us in advance. We will only accept payment requests during office hours in situations where prompt SBC actions are deemed to be necessary.'/>
+                <Header as='h2' content='Reimbursement Process' textAlign='center' />
+                <Segment.Group stackable horizontal={!isMobile}>
+                    {ReimbursementSteps.map(mapReimbursementStepsToComponent)}
                 </Segment.Group>
-                <Divider/>
+                <Header as='h2' content='Service Payment Process' textAlign='center' />
+                <Segment.Group stackable horizontal={!isMobile}>
+                    {ServicePaymentSteps.map(mapReimbursementStepsToComponent)}
+                </Segment.Group>
             </div>
-        );
+        )
     }
 }
 
@@ -492,5 +378,5 @@ class EventPlanningPanel extends Component {
 
 
 export {
-    GroupsTab, ReimbursementTab, CharteringTab, SBCTab, BudgetingTab, EventPlanningTab
+    GroupsTab, ReimbursementTab, CharteringTab, BudgetingTab, EventPlanningTab
 }

@@ -4,79 +4,75 @@ import links from './links'
 import { Segment, List, Label, Loader, Header, Message, Image, Popup, Icon, Button, Divider } from 'semantic-ui-react'
 
 
-class CharteringPanel extends Component {
+
+class EventPlanningPanel extends Component {
     render() {
         return (
             <div>
-            <Header content='How do I get my club chartered?' textAlign='center' />
                 <Segment.Group attached='top' stackable vertical>
                     <Segment>
-                        <Header content='1. Statement of Interest' textAlign='center' />
+                        <Header content='1. Planning' textAlign='center' />
                         <Divider/>
                         <Segment.Group horizontal>
                             <Segment textAlign='center'>
-                                {text.CharteringSteps.StepOne}
+                                {text.EventPlanningSteps.Planning}
                             </Segment>
                             <Segment>
-                                <Button color='red' href={links.statementOfInterst} content='Complete Statement of Interest'/>
+                                <Button color='red' href={links.osegraphicdesign} content='Graphic Design Help'/>
                             </Segment>
                         </Segment.Group>
                     </Segment>
                     <Segment>
-                        <Header content='2. Liaison Review' textAlign='center' />
+                        <Header content='2. Funding & Services' textAlign='center' />
                         <Divider/>
                         <Segment.Group horizontal>
                             <Segment textAlign='center'>
-                                {text.CharteringSteps.StepTwo}
+                            {text.EventPlanningSteps.Funding}
                             </Segment>
                             <Segment>
-                                <Button color='red' href={links.socEmail} content='Contact Student Orgs'/>
+                            <Button.Group vertical fluid>
+                                <Button color='red' href={links.osefunding} content='OSE Funding Request'/>
+                                <Button.Or />
+                                <Button color='red' href={links.sgofunding} content='SGO Funding Request'/>
+                            </Button.Group>
                             </Segment>
                         </Segment.Group>
                     </Segment>
                     <Segment>
-                        <Header content='3. Seed Funding (Optional)' textAlign='center' />
+                        <Header content='3. Review' textAlign='center' />
                         <Divider/>
                         <Segment.Group horizontal>
                             <Segment textAlign='center'>
-                                {text.CharteringSteps.StepThree}
+                                {text.EventPlanningSteps.Review}
                             </Segment>
                             <Segment>
-                                <Button color='red' href={links.socFundingForm} content='View Funding Form'/>
+                                <Button color='red' href={links.oseinterns} content='OSE Intern Info'/>
                             </Segment>
                         </Segment.Group>
+
                     </Segment>
                     <Segment>
-                        <Header content='4. Draft a Charter' textAlign='center' />
+                        <Header content='4. Reserve Space' textAlign='center' />
                         <Divider/>
                         <Segment.Group horizontal>
                             <Segment textAlign='center'>
-                                {text.CharteringSteps.StepFour}
+                                {text.EventPlanningSteps.Reserve}
                             </Segment>
                             <Segment>
-                                <Button color='red' href={links.sampleCharter} content='View Example Charter'/>
+                                <Button fluid color='red' href={links.reserve} content='Reserve Space'/>
                             </Segment>
                         </Segment.Group>
                     </Segment>
-                    <Segment>
-                        <Header content='5. Approval' textAlign='center' />
+                    <Segment textAlign='center'>
+                        <Header content='5. Enjoy!' textAlign='center' />
                         <Divider/>
-                        <Segment.Group horizontal>
-                            <Segment textAlign='center'>
-                                {text.CharteringSteps.StepFive}
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment>
-                        <Header textAlign='center'>
-                            Have Questions?
-                        </Header>
-                        <Button fluid color='red' href={links.socEmail} content='Send us an email!'/>
+                        {text.EventPlanningSteps.Enjoy}
                     </Segment>
                 </Segment.Group>
+                <Divider/>
             </div>
-        )
+        );
     }
 }
 
-export default CharteringPanel
+export default EventPlanningPanel

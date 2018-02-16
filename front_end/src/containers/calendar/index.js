@@ -74,6 +74,8 @@ class Calendar extends Component {
         return (
             <div>
                 <div className="App-header">
+                    <Header textAlign='center' size='huge'>Calendar</Header>
+                    <Divider/>
                 </div>
                 <div className="App-intro">
                     <Container>

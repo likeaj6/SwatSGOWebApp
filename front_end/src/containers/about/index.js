@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import {Menu, List, Loader, Header, Icon, Divider, Container } from 'semantic-ui-react'
+import {Menu, Loader, Header, Icon, Divider } from 'semantic-ui-react'
 import { StructureTab, LegislationTab, CommitteesTab } from './tabPanes'
 import { Route, Redirect } from 'react-router'
-import { push } from 'react-router-redux'
-import { bindActionCreators } from 'redux'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -67,7 +65,7 @@ class About extends Component {
     }
 
     render() {
-        const {loading, feed} = this.state
+        const {loading} = this.state
         const {match} = this.props
         // console.log(this.panes)
         // const tabPanes = panes
@@ -91,7 +89,7 @@ class About extends Component {
                     <Header textAlign='center' size='huge'>About SGO</Header>
                     <Divider/>
                 </div>
-                <div className="App-intro">
+                <div className="App-intro" style={{marginBottom: "30%"}}>
                     {content}
                 </div>
 

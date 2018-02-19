@@ -3,14 +3,12 @@ import { render } from 'react-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import configureStore from './store/Store'
 import { Provider } from 'react-redux'
-import Store, { history } from './store/Store'
+import { history } from './store/Store'
 import App from './App'
-import Routes from './routes'
 
 import './semantic/dist/semantic.min.css';
 import './index.css'
 
-const target = document.getElementById('root')
 const store = configureStore()
 
 render(

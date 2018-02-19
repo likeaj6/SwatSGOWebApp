@@ -1,81 +1,81 @@
 import React, { Component } from 'react';
-import { Loader, Header, Image, Dropdown, Form, Icon, Button, Divider, Segment } from 'semantic-ui-react'
+import { Loader, Header, Image, Form, Divider, Segment } from 'semantic-ui-react'
 import logo from '../../logo.svg';
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import swal from 'sweetalert2'
+import {loaded, handleFormSubmit} from './form-submission-handler'
 
 // const sendmail = require('sendmail')();
 
 const contactOptions = [
   { key: 'sbc', text: 'SBC', value: 'swarthmoresbc@gmail.com' },
   { key: 'sgo', text: 'SGO', value: 'sgo@swarthmore.edu' },
+  { key: 'jjin', text: 'test', value: 'jjin3@swarthmore.edu' },
 ]
 
 
 
 const ContactForm = (props) => {
-    const {handleSubmit, handleChange, name, message, email, recipient} = props
+    const {handleSubmit, handleChange, invalidEmail, name, message, email, recipient} = props
 
     return (
         <div>
-        <Form onSubmit={handleSubmit}>
-            <Form.Select label='To' fluid options={contactOptions} placeholder='To: recipient' name='recipient' value={recipient} onChange={handleChange} />
+        <Form id='contactForm' action="https://script.google.com/macros/s/AKfycbw5WdJ6CVyDnX9L_ivHrveVp_cRMHK971Ib1d1twtQAIpHj6EQ/exec" as="form" method="POST" onSubmit={handleSubmit}>
+            <Form.Select id="contactRecipient" required label='To' fluid options={contactOptions} placeholder='To: recipient' name='Recipient' value={recipient} onChange={handleChange} />
             <Form.Group>
-                <Form.Input label='Name' width={4} placeholder='Name' name='name' value={name} onChange={handleChange} />
-                <Form.Input label='Your Email' required width={4} placeholder='...@swarthmore.edu' name='email' value={email} onChange={handleChange} />
+                <Form.Input label='Name' width={5} placeholder='Name' name='Name' value={name} onChange={handleChange} />
+                <Form.Input label='Your Email' error={invalidEmail} required width={5} placeholder='...@swarthmore.edu' name='Email' value={email} onChange={handleChange} />
             </Form.Group>
-            <Form.TextArea label='Your Message' required placeholder='Message' name='message' value={message} onChange={handleChange} />
+            <Form.TextArea label='Your Message' required placeholder='Message' name='Message' value={message} onChange={handleChange} />
             <Form.Button content='Submit' />
         </Form>
         </div>
     );
 }
 
+function validEmail(email) { // see:
+  var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  return re.test(email);
+}
 
 class Contact extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            name: '', email: '', recipient: '', submittedName: '', submittedEmail: '', message: '', submittedMessage: ''
         }
     }
     componentDidMount() {
-        fetch('/')
         setTimeout(() => {
             this.setState({
                 loading: false
             })
         }, 10)
+        loaded()
         //   .then(res => res.json())
         //   .then(users => this.setState({ users }));
     }
 
     handleChange = (e, { name, value }) => {
-        this.setState({ [name]: value })
+        this.setState({ [name.toLowerCase()]: value, invalidEmail: false })
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
         const { recipient, name, email, message} = this.state
-        this.setState({ submittedRecipient: recipient,submittedName: name, submittedEmail: email, submittedMessage: message })
-        swal({title:"Thank you!", text:"Your message has been sent!", type:"success"})
-
-        // sendmail({
-        //     from: 'no-reply@yourdomain.com',
-        //     to: 'jjin3@swarthmore.edu',
-        //     subject: 'test sendmail',
-        //     html: 'Mail of test sendmail ',
-        //   }, function(err, reply) {
-        //     console.log(err && err.stack);
-        //     console.dir(reply);
-        // });
+        if (!validEmail(email)) {
+            this.setState({ invalidEmail: true})
+        } else {
+            this.setState({ submittedRecipient: recipient, submittedName: name, submittedEmail: email, submittedMessage: message })
+            swal({title:"Thank you!", text:"Your message has been sent!", type:"success"})
+        }
     }
 
     render() {
-        const {loading, name, message, email, recipient} = this.state
-        const formProps = {recipient, name, message, email, handleChange: this.handleChange, handleSubmit: this.handleSubmit}
-        const {match} = this.props
+        const {loading, name, message, email, recipient, invalidEmail} = this.state
+        const formProps = {recipient, name, message, invalidEmail, email, handleChange: this.handleChange, handleSubmit: this.handleSubmit}
+        // const {match} = this.props
         var content;
         if (loading) {
              content = <div><Loader active={loading}>

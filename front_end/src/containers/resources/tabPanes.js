@@ -119,7 +119,7 @@ const StudentGroupsItems = [
         key: 'student-orgs',
         icon: 'sitemap',
         title: '3. Student Organization Committee',
-        link: true,
+        link: false,
         index: '2'
     },
     {
@@ -127,11 +127,11 @@ const StudentGroupsItems = [
         icon: 'dollar',
         title: '4. Get Funding',
         to: '/resources/funding',
-        description: 'Click to view more info',
-        style: {
-            color: '#4183c5'
-        },
-        link: true,
+        // description: 'Click to view more info',
+        // style: {
+        //     color: '#4183c5'
+        // },
+        link: false,
         index: '3'
     },
     {
@@ -156,6 +156,19 @@ class StudentGroupsPanel extends Component {
             active: 'null',
         }
         this.mapStepItemToComponent = this.mapStepItemToComponent.bind(this);
+        this.resize = this.resize.bind(this)
+    }
+    componentDidMount() {
+        window.addEventListener("resize", this.resize);
+        this.resize();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize);
+    }
+
+    resize() {
+        this.setState({isMobile: window.innerWidth < 992});
     }
 
     handleClick = (e, { title }) => {
@@ -165,7 +178,8 @@ class StudentGroupsPanel extends Component {
     mapStepItemToComponent(step, index) {
         const { key, icon, title, link, style } = step
         const { active } = this.state
-        const hasLink = ['sbc', 'chartering', 'funding'].indexOf(key) > -1
+        // const hasLink = ['sbc', 'chartering', 'funding'].indexOf(key) > -1
+        const hasLink = ['sbc', 'chartering'].indexOf(key) > -1
         return (
             <Step {...step} active={active === title} as={(hasLink) ? NavLink: null} onClick={hasLink? this.handleClick:null}/>
         )
@@ -176,7 +190,7 @@ class StudentGroupsPanel extends Component {
             <div>
                 <Header as='h2' content='Student Group Processes' textAlign='center' />
                 <Segment.Group piled horizontal>
-                    <Step.Group fluid widths={5} stackable='tablet' items={StudentGroupsItems.map(this.mapStepItemToComponent)}/>
+                    <Step.Group fluid widths={window.innerWidth < 992 ? 10 : 5 } stackable='tablet' items={StudentGroupsItems.map(this.mapStepItemToComponent)}/>
                 </Segment.Group>
                 <Divider/>
             </div>
@@ -202,7 +216,7 @@ class BudgetingPanel extends Component {
         return (
             <div>
                 <Header content='Are you chartered?' textAlign='center' />
-                <Segment.Group piled stackable horizontal >
+                <Segment.Group piled stackable horizontal={window.innerWidth >= 500} >
                     {budgetingItems.map(mapItemsToCards)}
                 </Segment.Group>
                 <Divider/>
@@ -225,6 +239,7 @@ function mapReimbursementStepsToComponent(step, index) {
             <Card
                 className='StepCards'
                 raised
+                fluid={window.innerWidth <= 1000}
                 color='red'
                 extra={buttons}
                 key={index}
@@ -346,15 +361,20 @@ const ServicePaymentSteps = [
 class ReimbursementTab extends Component {
     constructor(props) {
         super(props);
-        this.state = { isMobile: window.innerWidth <= 760}
+        this.state = { isMobile: window.innerWidth <= 1000}
+        this.resize = this.resize.bind(this)
     }
     componentDidMount() {
-        window.addEventListener("resize", this.resize.bind(this));
+        window.addEventListener("resize", this.resize);
         this.resize();
     }
 
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize);
+    }
+
     resize() {
-        this.setState({isMobile: window.innerWidth <= 760});
+        this.setState({isMobile: window.innerWidth <= 1000});
     }
     render() {
         const {isMobile} = this.state

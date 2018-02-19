@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Loader, Header, Image, Icon, Button, Divider, Container } from 'semantic-ui-react'
+import { Loader, Header, Image, Divider } from 'semantic-ui-react'
 import Feed from './feed'
 import logo from '../../logo.svg';
 import { push } from 'react-router-redux'
@@ -25,7 +25,7 @@ class Home extends Component {
     }
 
     render() {
-        const {loading, feed} = this.state
+        const {loading} = this.state
         var content;
         if (loading) {
              content = <div><Loader active={loading}>
@@ -42,7 +42,7 @@ class Home extends Component {
                     <Header textAlign='center' size='huge'>Dashboard</Header>
                     <Divider/>
                 </div>
-                <div style={{marginTop:'3%'}}>
+                <div className="App-intro" style={{marginTop:'3%', marginBottom:'5%'}}>
                     {content}
                 </div>
             </div>

@@ -71,7 +71,7 @@ const SenateSegment = () => {
     return (
         <div>
             <Segment raised color='red' children={text.SenateDescription}/>
-            <Segment raised color='gray' children={
+            <Segment raised color='grey' children={
                 <div>
                     {text.SenateStructure1}
                     <Segment basic children={

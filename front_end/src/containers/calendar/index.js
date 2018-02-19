@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Loader, Header, Image, Icon, Button, Divider, Container } from 'semantic-ui-react'
+import { Loader, Header, Image, Divider, Container } from 'semantic-ui-react'
 import logo from '../../logo.svg';
 import { push } from 'react-router-redux'
 
@@ -28,31 +28,26 @@ class Calendar extends Component {
     componentDidMount() {
         console.log(eventUrls)
         Object.values(eventUrls).map(async val => {
-          let r = await fetch(val, { mode: `cors` })
-          let { items } = await r.json()
-          var events = []
-          items.map((event) => {
-            events.push({
-            location: event.location,
-            start: event.start.date || event.start.dateTime,
-            end: event.end.date || event.end.dateTime,
-            title: event.summary,
+            let r = await fetch(val, { mode: `cors` })
+            let { items } = await r.json()
+            var events = []
+            items.map((event) => {
+                events.push({
+                    location: event.location,
+                    start: moment(event.start.dateTime).toDate(),
+                    end: moment(event.end.dateTime).toDate(),
+                    title: event.summary,
+                })
+            })
+            this.setState({
+                events: events,
+                loading: false
             })
         })
-          this.setState({
-              events: events,
-              loading: false
-          })
-        })
-        // fetch(eventUrls).then(results => {
-        //     console.log(results)
-        // }).then(events => );
-        //   .then(res => res.json())
-        //   .then(users => this.setState({ users }));
     }
 
     render() {
-        const {loading, feed, events} = this.state
+        const {loading, events} = this.state
         var content;
         if (loading) {
              content = <div><Loader active={loading}>

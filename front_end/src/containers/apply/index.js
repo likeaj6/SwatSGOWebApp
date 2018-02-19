@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Loader, Header, Image, Icon, Button, Divider, Container } from 'semantic-ui-react'
+import { Loader, Header, Image, Divider } from 'semantic-ui-react'
 import Applications from './applications'
 import logo from '../../logo.svg';
 import { push } from 'react-router-redux'

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { ConnectedRouter } from 'react-router-redux'
-import { history } from './store/Store'
-import Sidebar from './components/Sidebar'
+import Navbar from './components/Sidebar'
 import Routes from './routes'
 import './App.css';
 
@@ -29,8 +27,9 @@ class App extends Component {
         const path = history.location.pathname
         return (
             <div>
-                <Sidebar path={path}/>
-                <Routes/>
+                <Navbar path={path}>
+                    <Routes/>
+                </Navbar>
             </div>
         );
     }

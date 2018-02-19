@@ -5,7 +5,26 @@ import { Segment, List, Label, Loader, Header, Message, Image, Popup, Icon, Butt
 
 
 class CharteringPanel extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { isMobile: window.innerWidth <= 760}
+        this.resize = this.resize.bind(this)
+    }
+    componentDidMount() {
+        window.addEventListener("resize", this.resize);
+        this.resize();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize);
+    }
+
+    resize() {
+        this.setState({isMobile: window.innerWidth <= 760});
+    }
+
     render() {
+        const {isMobile} = this.state
         return (
             <div>
             <Header content='How do I get my club chartered?' textAlign='center' />
@@ -13,55 +32,55 @@ class CharteringPanel extends Component {
                     <Segment>
                         <Header content='1. Statement of Interest' textAlign='center' />
                         <Divider/>
-                        <Segment.Group horizontal>
+                        <Segment.Group horizontal={!isMobile}>
                             <Segment textAlign='center'>
                                 {text.CharteringSteps.StepOne}
                             </Segment>
                             <Segment>
-                                <Button color='red' href={links.statementOfInterst} content='Complete Statement of Interest'/>
+                                <Button fluid color='red' href={links.statementOfInterst} content='Complete Statement of Interest'/>
                             </Segment>
                         </Segment.Group>
                     </Segment>
                     <Segment>
                         <Header content='2. Liaison Review' textAlign='center' />
                         <Divider/>
-                        <Segment.Group horizontal>
+                        <Segment.Group horizontal={!isMobile}>
                             <Segment textAlign='center'>
                                 {text.CharteringSteps.StepTwo}
                             </Segment>
                             <Segment>
-                                <Button color='red' href={links.socEmail} content='Contact Student Orgs'/>
+                                <Button fluid color='red' href={links.socEmail} content='Contact Student Orgs'/>
                             </Segment>
                         </Segment.Group>
                     </Segment>
                     <Segment>
                         <Header content='3. Seed Funding (Optional)' textAlign='center' />
                         <Divider/>
-                        <Segment.Group horizontal>
+                        <Segment.Group horizontal={!isMobile}>
                             <Segment textAlign='center'>
                                 {text.CharteringSteps.StepThree}
                             </Segment>
                             <Segment>
-                                <Button color='red' href={links.socFundingForm} content='View Funding Form'/>
+                                <Button fluid color='red' href={links.socFundingForm} content='View Funding Form'/>
                             </Segment>
                         </Segment.Group>
                     </Segment>
                     <Segment>
                         <Header content='4. Draft a Charter' textAlign='center' />
                         <Divider/>
-                        <Segment.Group horizontal>
+                        <Segment.Group horizontal={!isMobile}>
                             <Segment textAlign='center'>
                                 {text.CharteringSteps.StepFour}
                             </Segment>
                             <Segment>
-                                <Button color='red' href={links.sampleCharter} content='View Example Charter'/>
+                                <Button fluid color='red' href={links.sampleCharter} content='View Example Charter'/>
                             </Segment>
                         </Segment.Group>
                     </Segment>
                     <Segment>
                         <Header content='5. Approval' textAlign='center' />
                         <Divider/>
-                        <Segment.Group horizontal>
+                        <Segment.Group horizontal={!isMobile}>
                             <Segment textAlign='center'>
                                 {text.CharteringSteps.StepFive}
                             </Segment>

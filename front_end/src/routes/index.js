@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link, Redirect } from 'react-router'
+import { Route} from 'react-router'
 
 /* containers */
 import Home from '../containers/home'

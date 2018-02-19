@@ -31,18 +31,21 @@ function mapItemsToCards(item, index) {
 const SBCItems = [
     {
         header: 'Request For Reimbursement/Payment',
+        key: 'reimbursement',
         to: '/resources/reimbursement',
         action: 'View Form',
         text: text.SBC.Reimbursement,
     },
     {
         header: 'Request Supplementary Funding',
+        key: 'supplementary',
         link: links.supplementaryFunding,
         action: 'View Funding Request Form',
         text: text.SBC.SupplementalFunding,
     },
     {
         header: 'Authorize Non-Treasurer',
+        key: 'authorize',
         link: links.nonTreasurerAuthorization,
         action: 'View Authorization Form',
         text: text.SBC.NonTreasurerAuthorization,
@@ -52,6 +55,7 @@ const SBCItems = [
 const SBCDocuments = [
     {
         header: 'SBC Bylaws',
+        key: 'bylaws',
         link: links.byLaws,
         action: 'View Bylaws',
         text: text.SBC.ByLaws,
@@ -59,6 +63,7 @@ const SBCDocuments = [
     },
     {
         header: 'Treasuring 101',
+        key: 'treasuring',
         link: links.treasuring101,
         action: 'View Document',
         text: text.SBC.Treasuring101,
@@ -66,6 +71,7 @@ const SBCDocuments = [
     },
     {
         header: 'Treasurer Agreement',
+        key: 'agreement',
         link: links.treasurerAgreement,
         action: 'View Agreement',
         text: text.SBC.TreasurerAgreement,
@@ -74,9 +80,7 @@ const SBCDocuments = [
 ]
 
 function printTimes(item, index) {
-    return <div>
-    {item}
-    </div>
+    return <p>{item}</p>
 }
 class SBCTab extends Component {
     constructor(props) {
@@ -106,7 +110,7 @@ class SBCTab extends Component {
                 <Header as='h4' content={text.SBCDescription} textAlign='center'/>
                 <Segment>
 
-                    <Segment.Group piled stackable compact horizontal={!isMobile} size='small' >
+                    <Segment.Group piled horizontal={!isMobile} size='small' >
                         <Segment compact>
                         <Header as='h4' color='red' content='Contact:'
                         textAlign='center'/>
@@ -125,17 +129,17 @@ class SBCTab extends Component {
                         <Divider/>
                         <p style={{textAlign:'center'}}><b>{text.SBC.OfficeHoursLocation}</b></p>
                         <Divider/>
-                        <p style={{textAlign:'center'}}>{text.SBC.OfficeHoursTime.map(printTimes)}</p>
+                        <div style={{textAlign:'center'}}>{text.SBC.OfficeHoursTime.map(printTimes)}</div>
                         </Segment>
                     </Segment.Group>
                 </Segment>
             </Segment>
             <Header as='h2' content='What would you like to do?' textAlign='center' />
-            <Segment.Group piled stackable horizontal={!isMobile}>
+            <Segment.Group piled horizontal={!isMobile}>
                 {SBCItems.map(mapItemsToCards)}
             </Segment.Group>
             <Header as='h2' content='Other resources:' textAlign='center' />
-            <Segment.Group piled stackable horizontal={!isMobile} >
+            <Segment.Group piled horizontal={!isMobile} >
                 {SBCDocuments.map(mapItemsToCards)}
             </Segment.Group>
         </Segment>

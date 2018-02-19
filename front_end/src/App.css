@@ -1,15 +1,26 @@
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 767px) {
     .App {
-      width: 90% !important;
-      left: 5% !important;
-      right: 5% !important;
-      /* height: 80%; */
+        box-sizing: padding-box;
+        -moz-box-sizing: padding-box;
+        top: 10% !important;
+        width: 90% !important;
+        left: 5% !important;
+        right: 5% !important;
+        height: 10vh;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
     }
+
+    .App-intro {
+        margin-bottom: 30% !important;
+    }
+
     .Sidebar {
-        width: 0% !important;
+        /* width: 0% !important;
         display: none !important;
         visibility: hidden !important;
-        height: 0% !important;
+        height: 0% !important; */
     }
  }
 
@@ -47,7 +58,7 @@
   color: #824c4c;
 }
 
-
 .App-intro {
-  font-size: large;
+    margin-bottom: 5%;
+    font-size: large;
 }

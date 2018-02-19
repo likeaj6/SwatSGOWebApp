@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Menu, List, Loader, Header, Icon, Divider, Container } from 'semantic-ui-react'
+import {Menu, Loader, Header, Icon, Divider } from 'semantic-ui-react'
 import { ExecboardTab, SenateTab, CommitteesTab } from './MembersPanes'
 import { Route, Redirect } from 'react-router'
 import { push } from 'react-router-redux'
@@ -8,20 +8,21 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const panes = [
-        {
+    {
         menuItem: <Menu.Item as={NavLink} to='/members/execboard' key='structure' ><Icon name='university'/>Executive Board</Menu.Item>,
         key: 'execboard',
         pane: <ExecboardTab/>
-        },
-        {
+    },
+    {
         menuItem: <Menu.Item as={NavLink} to='/members/senate' key='legislation'><Icon name='book'/>Senate</Menu.Item>,
         key: 'senate',
         pane: <SenateTab/>
-        },
-        {
-        menuItem: <Menu.Item as={NavLink} to='/members/committees' key='committees'><Icon name='address book outline'/>Committees</Menu.Item>,
-        key: 'committees'
     },
+    // {
+    //     menuItem: <Menu.Item as={NavLink} to='/members/committees' key='committees'><Icon name='address book outline'/>Committees</Menu.Item>,
+    //     key: 'committees',
+    //     pane: <CommitteesTab/>
+    // },
 ]
 
 const MembersTab = (props) => {

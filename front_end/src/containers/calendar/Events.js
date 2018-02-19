@@ -3,8 +3,6 @@ import { Card} from 'semantic-ui-react'
 
 import moment from 'moment'
 
-import Event from './Event'
-
 class EventCards extends Component {
     constructor(props) {
         super(props);

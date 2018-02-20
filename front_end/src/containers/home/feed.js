@@ -10,6 +10,7 @@ function mapItemsToCards(item, index) {
             <Card
                 fluid
                 as={NavLink}
+                smooth
                 to={to}
                 raised
                 color='red'
@@ -45,7 +46,7 @@ const actionCards = [
     },
     {
         header: 'Contact Us',
-        to: '/contact/',
+        to: '/contact#sgo',
         action: 'Get Started',
         text: '',
     },
@@ -61,17 +62,13 @@ const fundingCards = [
     {
         header: 'Interested in SEPTA Tickets for your club?',
         shouldScroll: true,
-        to: {
-          pathname: '/sbc',
-          hash: '#septa',
-          state: { fromDashboard: true }
-        },
+        to: '/sbc#septa',
         action: 'Get Started',
         text: '',
     },
     {
         header: 'Contact SBC',
-        to: '/contact/',
+        to: '/contact#sbc',
         action: 'Get Started',
         text: '',
     },

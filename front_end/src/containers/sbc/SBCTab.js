@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import text from './text'
 import links from './links'
-import { Segment, List, Label, Header, Message, Card, Icon, Button, Divider } from 'semantic-ui-react'
+import { Segment, List, Label, Header, Message, Card, Icon, Button, Transition, Divider } from 'semantic-ui-react'
 
 import { NavLink } from 'react-router-dom'
 
@@ -11,10 +11,10 @@ function mapItemsToCards(item, index) {
     var as = to == null ? 'a':NavLink
     var cardHeight = height == null ? '17rem':height
     return (
-        <Segment key={key+index}>
+        <Segment id={id} key={key+index}>
             <Card
+                className={window.location.hash == '#'+id ? 'shake': ''}
                 fluid
-                id={id}
                 as={as}
                 href={link}
                 to={to}
@@ -56,7 +56,7 @@ const SBCDocuments = [
     {
         header: 'SEPTA Tickets',
         key: 'septa',
-        id: '#septa',
+        id: 'septa',
         link: links.septaTickets,
         action: 'View Form',
         text: text.SBC.SeptaTickets,
@@ -91,6 +91,7 @@ const SBCDocuments = [
 function printTimes(item, index) {
     return <p key={item+index}>{item}</p>
 }
+
 class SBCTab extends Component {
     constructor(props) {
         super(props);

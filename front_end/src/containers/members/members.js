@@ -1,7 +1,7 @@
 var members = {
     Execboard: [
-        {committee:'copres1', email: 'nyuan1@swarthmore.edu', title: 'Co-President', name: 'Nancy Yuan \'19'},
-        {committee:'copres2', email: 'dpipkin1@swarthmore.edu', title: 'Co-President', name: 'David Pipkin \'18'},
+        {committee:'copres1', email: 'dpipkin1@swarthmore.edu', title: 'Co-President', name: 'David Pipkin \'18'},
+        {committee:'copres2', email: 'nyuan1@swarthmore.edu', title: 'Co-President', name: 'Nancy Yuan \'19'},
         {committee:'appointments', email: 'hhan3@swarthmore.edu', title: 'Chair of Internal Affairs', name: 'Henry Han \'20'},
         {committee:'diversity', email: 'jjimine@swarthmore.edu', title: 'Chair of Diversity', name: 'Jasmine Jiminez \'19'
         },

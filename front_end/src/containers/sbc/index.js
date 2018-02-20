@@ -35,6 +35,15 @@ const ResourcesTab = (props) => {
 //     selectedTabItem: (item) => push(item)
 // }, dispatch)
 
+let HashRoute = ({ component: Component, path, ...routeProps }) => (
+  <Route
+    {...routeProps}
+    component={({ location, ...props }) =>
+      location.hash === path && <Component {...props} />
+    }
+  />
+)
+
 class SBC extends Component {
     constructor(props) {
         super(props);
@@ -65,10 +74,10 @@ class SBC extends Component {
                 <p>We are fetching that content for you.</p>
             </Loader></div>
         } else {
-            console.log(match)
+            // alert(match.url)
             content = <div><Route path={`${match.url}/:id`} component={(props, panes) => <ResourcesTab {...props} />}/>
-            <Route exact path={match.url} render={() => (
-                <Redirect to={`${match.url}/home`}/>
+            <Route exact path={match.url} component={(props, panes) => (
+                <ResourcesTab {...props} />
             )}/>
             </div>
         }
@@ -81,7 +90,6 @@ class SBC extends Component {
                 <div className="App-intro">
                     {content}
                 </div>
-
             </div>
         );
     }

@@ -54,6 +54,17 @@ class Contact extends Component {
             })
         }, 10)
         loaded()
+        if (window.location.hash != '') {
+            const recipient = window.location.hash.substring(1)
+            const options = contactOptions.map(a => a.key);
+            const hashIndex = options.indexOf(recipient)
+            if (hashIndex >= 0) {
+                const values = contactOptions.map(a => a.value);
+                this.setState({
+                    recipient: values[hashIndex]
+                })
+            }
+        }
         //   .then(res => res.json())
         //   .then(users => this.setState({ users }));
     }

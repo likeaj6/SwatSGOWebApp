@@ -9,27 +9,27 @@ import { NavLink, Link} from 'react-router-dom'
 import {Icon, Menu, Sidebar, Image, Responsive} from 'semantic-ui-react'
 
 const menuItems = [
-    {key:'logo', name: 'logo', to:'/', exact: true, image: logo, header: false, icon: null, content: null},
-    {key:'home', name: 'home', to: '/', exact: true, header: true, icon: 'home', content: 'Home',
+    {key:'logo', name: 'logo', color: '#FFFFFF', to:'/', exact: true, image: logo, header: false, icon: null, content: null},
+    {key:'home', name: 'home', color: '#FFFFFF', to: '/', exact: true, header: true, icon: 'home', content: 'Home',
         subMenu: [
             // {name: 'news', to: '/news', icon: 'newspaper', content: 'News'},
-            {name: 'resources', to: '/resources', icon: 'book', content: 'Resources'},
-            {name: 'apply', to: '/apply', icon: 'wordpress forms', content: 'Apply'},
-            {name: 'about', to: '/about', icon: 'info', content: 'About'}
+            {name: 'resources', color:'#F2F6F7', to: '/resources', icon: 'book', content: 'Resources'},
+            {name: 'apply', color: '#F2F6F7', to: '/apply', icon: 'wordpress forms', content: 'Apply'},
+            {name: 'about', color: '#F2F6F7', to: '/about', icon: 'info', content: 'About'}
         ] },
-    {key:'calendar', name: 'calendar', to: '/calendar', header: true, icon: 'calendar', content: 'Calendar'},
-    {key: 'members', name: 'members', to: '/members', header: true, icon: 'users', content: 'Members'},
-    {key: 'contact', name: 'contact', to: '/contact', header: true, icon: 'talk outline', content: 'Contact'},
-    {key: 'suggestions', name: 'suggestions', to: '/suggestions', header: true, icon: 'inbox' , content: 'Suggestions Box'}
+    {key:'calendar', name: 'calendar', color: '#FFFFFF', to: '/calendar', header: true, icon: 'calendar', content: 'Calendar'},
+    {key: 'members', name: 'members', color: '#FFFFFF', to: '/members', header: true, icon: 'users', content: 'Members'},
+    {key: 'contact', name: 'contact', color: '#FFFFFF',  to: '/contact', header: true, icon: 'talk outline', content: 'Contact'},
+    {key: 'suggestions', name: 'suggestions', color: '#FFFFFF', to: '/suggestions', header: true, icon: 'inbox' , content: 'Suggestions Box'}
 ]
 
 
 const SidebarItem = props => {
     return (
-        <Menu.Item as={(props.clickable) ? NavLink: Link} to={props.to} header={props.header} name={props.name} >
+        <Menu.Item as={(props.clickable) ? NavLink: Link} exact={(!props.activeHome) && props.name==='home'} to={props.to} header={props.header} link name={props.name} >
             {props.image? <Image src={props.image}/>: null}
-            {props.icon? <Icon size='large' name={props.icon}/>: null}
-            {props.content}
+            {props.icon? <Icon style={{color: props.color}} size='large' name={props.icon}/>: null}
+            <div style={{color: props.color}}>{props.content}</div>
             {props.children}
         </Menu.Item>
     );
@@ -89,7 +89,7 @@ class NavBarMobile extends Component {
                 >
                     <Menu fixed="top" color="red" inverted>
                         <Menu.Item>
-                          <Image size="mini" alt="logo" src={logo} />
+                          <Image size="mini" as={NavLink} to='/' alt="logo" src={logo} />
                         </Menu.Item>
                         <Menu.Item onClick={onToggle}>
                         <Icon name="sidebar" />
@@ -138,7 +138,7 @@ class Navbar extends Component {
     handleItemClick = (e, { name}) => {
         const path = (name === 'home') ? '': name
         this.props.selectedSidebarItem(path)
-        this.setState({ activeItem: name})
+        // this.setState({ activeItem: name})
         // e.stopPropagation();
     }
 
@@ -183,7 +183,7 @@ class Navbar extends Component {
                   </NavBarMobile>
                 </Responsive>
                 <Responsive minWidth={768}>
-                    <Menu className="Sidebar" fixed={isMobile ? "top":"left"} vertical={!isMobile} color="red" stackable inverted size="small" items={      menuItems.map(this.mapMenuItemsToComponent)}>
+                    <Menu className="Sidebar" fixed={isMobile ? "top":"left"} vertical={!isMobile} color="red" stackable inverted size="large" items={      menuItems.map(this.mapMenuItemsToComponent)}>
                     </Menu>
                     {children}
                 </Responsive>

@@ -76,7 +76,7 @@ function mapMembersToCards(member, index) {
         raised: true,
         color: 'red',
         extra: <div><Button href={'mailto:' + member.email} fluid content='Contact'/></div>,
-        key: committee,
+        key: member+index,
         description: <Card.Description textAlign='center' content={member.title}/>,
         image: <Image src={images[committee+'.jpg']}/>,
         header: <Header textAlign='center'>{name}<Divider/></Header>,

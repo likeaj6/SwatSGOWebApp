@@ -1,52 +1,30 @@
 import React, { Component } from 'react';
 import {Menu, Loader, Header, Icon, Divider } from 'semantic-ui-react'
-import { GroupsTab, CharteringTab, BudgetingTab, EventPlanningTab } from './tabPanes'
-// import SBCTab from './SBCTab'
-import FundingTab from './FundingTab'
+import SBCTab from './SBCTab'
 import { Route, Redirect } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-
+import ReimbursementTab from './ReimbursementProcess'
 
 
 
 const panes = [
-        {
-        menuItem: <Menu.Item as={NavLink} to='/resources/student-groups' key='student-groups' ><Icon name='users'/>Student Groups</Menu.Item>,
-        pane: <GroupsTab/>,
-        key: 'student-groups'
-        },
-        {
-        pane: <CharteringTab/>,
-        key: 'chartering'
-        },
-        {
-        pane: <FundingTab/>,
-        key: 'funding'
-        },
-        {
-        menuItem: <Menu.Item as={NavLink} to='/resources/budgeting' key='budgeting'><Icon name='bitcoin'/>Budgeting</Menu.Item>,
-        pane: <BudgetingTab/>,
-        key: 'budgeting'
-        },
-        {
-        menuItem: <Menu.Item as={NavLink} to='/resources/event-planning' key='event-planning'><Icon name='idea'/>Event Planning</Menu.Item>,
-        pane: <EventPlanningTab/>,
-        key: 'event-planning'
+    {
+        pane: <ReimbursementTab/>,
+        key: 'reimbursement'
     },
 ]
 
 const ResourcesTab = (props) => {
     const tabContent = panes.filter(tab => tab.key === props.match.params.id).pop()
     const hasTab = (tabContent != null)
+    var content = <SBCTab />
+    if (hasTab) {
+        content = tabContent.pane
+    }
     return (
         <div>
-            <Menu color='red' pointing stackable>
-                {panes.map((tab, index) => {
-                    return tab.menuItem
-                })}
-            </Menu>
-            {hasTab ? tabContent.pane: <Header>This Link Does Not Exist!</Header>}
+            {content}
         </div>
     )
     // <Tab menu={{ color: 'red', attached: false, tabular: false }} renderActiveOnly={false} defaultActiveIndex={-1} panes={panes}/>
@@ -57,7 +35,7 @@ const ResourcesTab = (props) => {
 //     selectedTabItem: (item) => push(item)
 // }, dispatch)
 
-class Resources extends Component {
+class SBC extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -79,10 +57,7 @@ class Resources extends Component {
         const {match} = this.props
         // console.log(this.panes)
         // const tabPanes = panes
-        if (match.url.slice(-1) == '/') {
-            match.url = match.url.substring(0, match.url.length-1) + ''
-        }
-
+        // console.log(ResourcesTab)
         var content;
         if (loading) {
              content = <div><Loader active={loading}>
@@ -90,17 +65,17 @@ class Resources extends Component {
                 <p>We are fetching that content for you.</p>
             </Loader></div>
         } else {
+            console.log(match)
             content = <div><Route path={`${match.url}/:id`} component={(props, panes) => <ResourcesTab {...props} />}/>
-
             <Route exact path={match.url} render={() => (
-                <Redirect to={`${match.url}/student-groups`}/>
+                <Redirect to={`${match.url}/home`}/>
             )}/>
             </div>
         }
         return (
             <div>
                 <div className="App-header">
-                    <Header textAlign='center' size='huge'>Resources</Header>
+                    <Header textAlign='center' size='huge'>SBC</Header>
                     <Divider/>
                 </div>
                 <div className="App-intro">
@@ -114,4 +89,4 @@ class Resources extends Component {
 
 export default connect(
     null,
-)(Resources)
+)(SBC)

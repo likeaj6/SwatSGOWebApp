@@ -26,7 +26,7 @@ const menuItems = [
 
 const SidebarItem = props => {
     return (
-        <Menu.Item as={(props.clickable) ? NavLink: Link} exact={(!props.activeHome) && props.name==='home'} to={props.to} header={props.header} name={props.name} >
+        <Menu.Item as={(props.clickable) ? NavLink: Link} to={props.to} header={props.header} name={props.name} >
             {props.image? <Image src={props.image}/>: null}
             {props.icon? <Icon size='large' name={props.icon}/>: null}
             {props.content}
@@ -89,7 +89,7 @@ class NavBarMobile extends Component {
                 >
                     <Menu fixed="top" color="red" inverted>
                         <Menu.Item>
-                          <Image size="mini" src={logo} />
+                          <Image size="mini" alt="logo" src={logo} />
                         </Menu.Item>
                         <Menu.Item onClick={onToggle}>
                         <Icon name="sidebar" />

@@ -51,7 +51,7 @@ class Applications extends Component {
         return (
             <div>
                 {newApplications}
-                <Label as='a' icon='group' color='red' ribbon>Committees Currently Accepting Applications:</Label>
+                <Label as='a' color='red' ribbon>Committees Currently Accepting Applications:</Label>
                 {applications}
             </div>
         );

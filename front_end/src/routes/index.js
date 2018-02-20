@@ -10,6 +10,7 @@ import Resources from '../containers/resources'
 import Apply from '../containers/apply'
 import Members from '../containers/members'
 import Suggestions from '../containers/suggestions'
+import SBC from '../containers/sbc'
 
 const routes = [
   { path: '/',
@@ -26,6 +27,11 @@ const routes = [
     exact: false,
     sidebar: () => <div>Resources</div>,
     main: (props) => <Resources {...props}/>
+  },
+  { path: '/sbc',
+    exact: false,
+    sidebar: () => <div>Resources</div>,
+    main: (props) => <SBC {...props}/>
   },
   { path: '/calendar',
     exact: false,
@@ -56,15 +62,17 @@ const routes = [
 
 const Routes = () => {
     return (
-        <div className="App">
-            {routes.map((route, index) => (
-                <Route
-                    key={index}
-                    path={route.path}
-                    exact={route.exact}
-                    component={route.main}
-                />
-            ))}
+        <div id="ScrollContainer">
+            <div className="App">
+                {routes.map((route, index) => (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        exact={route.exact}
+                        component={route.main}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

@@ -7,20 +7,20 @@ import { NavLink } from 'react-router-dom'
 
 
 function mapItemsToCards(item, index) {
-    const {header, text, action, link, to, height} = item
+    const {header, text, id, key, action, link, to, height} = item
     var as = to == null ? 'a':NavLink
     var cardHeight = height == null ? '17rem':height
     return (
-        <Segment>
+        <Segment key={key+index}>
             <Card
                 fluid
+                id={id}
                 as={as}
                 href={link}
                 to={to}
                 raised
                 color='red'
-                extra={<Button attached='bottom' as={as} color='red' to={to} href={link} content={action}/>}
-                key={index}
+                extra={<Button attached='bottom' color='red' content={action}/>}
                 description={<Card.Description textAlign='center' content={text}/>}
                 header={<Header textAlign='center'>{header}<Divider/></Header>}
             />
@@ -32,8 +32,8 @@ const SBCItems = [
     {
         header: 'Request For Reimbursement/Payment',
         key: 'reimbursement',
-        to: '/resources/reimbursement',
-        action: 'View Form',
+        to: '/sbc/reimbursement',
+        action: 'View Process/Form',
         text: text.SBC.Reimbursement,
     },
     {
@@ -53,6 +53,15 @@ const SBCItems = [
 ]
 
 const SBCDocuments = [
+    {
+        header: 'SEPTA Tickets',
+        key: 'septa',
+        id: '#septa',
+        link: links.septaTickets,
+        action: 'View Form',
+        text: text.SBC.SeptaTickets,
+        height: '13rem'
+    },
     {
         header: 'SBC Bylaws',
         key: 'bylaws',
@@ -80,7 +89,7 @@ const SBCDocuments = [
 ]
 
 function printTimes(item, index) {
-    return <p>{item}</p>
+    return <p key={item+index}>{item}</p>
 }
 class SBCTab extends Component {
     constructor(props) {

@@ -26,11 +26,11 @@ class App extends Component {
         // console.log(history)
         const path = history.location.pathname
         return (
-            <div>
+            <main>
                 <Navbar path={path}>
                     <Routes/>
                 </Navbar>
-            </div>
+            </main>
         );
     }
 

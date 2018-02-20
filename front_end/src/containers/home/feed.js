@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Header, Image, Label, Card, Icon, Button, Segment, Grid, Divider, Container } from 'semantic-ui-react'
-import { NavLink} from 'react-router-dom'
+import { Header, Image, Label, Card, Popup, Icon, Button, Segment, Grid, Divider, Container } from 'semantic-ui-react'
+import { NavHashLink as NavLink } from 'react-router-hash-link';
 
 function mapItemsToCards(item, index) {
-    const {header, text, action, link, to} = item
+    const {header, text, action, link, to, shouldScroll} = item
     // const hasLink = true
-
     return (
-        <Segment>
+        <Segment key={item+index}>
             <Card
                 fluid
                 as={NavLink}
@@ -55,13 +54,18 @@ const actionCards = [
 const fundingCards = [
     {
         header: 'Submit a reimbursement form',
-        to: '/resources/reimbursement',
+        to: '/sbc/reimbursement',
         action: 'Get Started',
         text: '',
     },
     {
-        header: 'How do I get funding for my club?',
-        to: '/resources/funding',
+        header: 'Interested in SEPTA Tickets for your club?',
+        shouldScroll: true,
+        to: {
+          pathname: '/sbc',
+          hash: '#septa',
+          state: { fromDashboard: true }
+        },
         action: 'Get Started',
         text: '',
     },
@@ -75,8 +79,8 @@ const fundingCards = [
 
 const generalCards = [
     {
-        header: 'Check out our FAQ!',
-        to: '/contact/',
+        header: 'When\'s our next meeting?',
+        to: '/calendar/',
         action: 'Take me there!',
         text: '',
     },
@@ -98,10 +102,15 @@ class Feed extends Component {
     constructor(props) {
         super(props);
         this.state = { isMobile: window.innerWidth <= 760}
+        this.resize = this.resize.bind(this)
     }
     componentDidMount() {
-        window.addEventListener("resize", this.resize.bind(this));
+        window.addEventListener("resize", this.resize);
         this.resize();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize);
     }
 
     resize() {
@@ -117,17 +126,22 @@ class Feed extends Component {
 
                     {featured}
                     <Segment.Group piled horizontal={!isMobile}>
-                        <Label as='a' icon='university' color='red' ribbon>General</Label>
+                        <Label color='red' ribbon>General</Label>
                         {actionCards.map(mapItemsToCards)}
                     </Segment.Group>
 
                     <Segment.Group piled horizontal={!isMobile}>
-                        <Label as='a' color='green' ribbon>SBC</Label>
+                        <Popup
+                            trigger={<Label as={NavLink} to='/sbc' ribbon>SBC</Label>}
+                        content='View SBC Page'
+                        position='left center'
+                        />
+
                         {fundingCards.map(mapItemsToCards)}
                         </Segment.Group>
 
                     <Segment.Group piled horizontal={!isMobile}>
-                        <Label as='a' color='grey' ribbon>Misc</Label>
+                        <Label color='grey' ribbon>Misc</Label>
                         {generalCards.map(mapItemsToCards)}
                     </Segment.Group>
                 </Grid>

@@ -26,7 +26,6 @@ class Calendar extends Component {
         }
     }
     componentDidMount() {
-        console.log(eventUrls)
         Object.values(eventUrls).map(async val => {
             let r = await fetch(val, { mode: `cors` })
             let { items } = await r.json()

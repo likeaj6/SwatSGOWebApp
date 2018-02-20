@@ -71,6 +71,11 @@ class About extends Component {
         // const tabPanes = panes
         // console.log(AboutTab)
         var content;
+
+        if (match.url.slice(-1) == '/') {
+            match.url = match.url.substring(0, match.url.length-1) + ''
+        }
+
         if (loading) {
              content = <div><Loader active={loading}>
                 <Header>Just one second</Header>

@@ -12,7 +12,7 @@ import {loaded, handleFormSubmit} from './form-submission-handler'
 const contactOptions = [
   { key: 'sbc', text: 'SBC', value: 'swarthmoresbc@gmail.com' },
   { key: 'sgo', text: 'SGO', value: 'sgo@swarthmore.edu' },
-  { key: 'jjin', text: 'test', value: 'jjin3@swarthmore.edu' },
+  // { key: 'jjin', text: 'test', value: 'jjin3@swarthmore.edu' },
 ]
 
 

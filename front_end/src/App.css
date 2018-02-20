@@ -10,6 +10,10 @@
         overflow-x: hidden;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        ::-webkit-scrollbar {
+            display:none;
+            background: transparent;
+        }
     }
 
     .App-intro {
@@ -29,6 +33,12 @@
         height: 20rem !important;
     }
  }
+
+#ScrollContainer{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
 
 .App {
   /* text-align: center; */

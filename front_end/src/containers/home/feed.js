@@ -77,7 +77,7 @@ const fundingCards = [
 const generalCards = [
     {
         header: 'When\'s our next meeting?',
-        to: '/calendar/',
+        to: '/calendar#0',
         action: 'Take me there!',
         text: '',
     },

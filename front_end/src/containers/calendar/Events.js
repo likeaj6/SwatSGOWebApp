@@ -19,7 +19,9 @@ class EventCards extends Component {
         return (
             <Card.Group>
                 {this.filterAndSort(events).map((e, i) =>
-                    <Card fluid raised color='blue' key={e.id+e.start} header={e.title} meta={e.location} description={'Time: ' + moment(e.start).format('MMMM Do YYYY, h:mm:ss a') + ' - ' + moment(e.end).format('h:mm:ss a')}/>
+                    <Card id={i} fluid raised color='blue' key={e.id+e.start}
+                    className={window.location.hash == '#'+ i ? 'shake': ''}
+                    header={e.title} meta={e.location} description={'Time: ' + moment(e.start).format('MMMM Do YYYY, h:mm:ss a') + ' - ' + moment(e.end).format('h:mm:ss a')}/>
                 )}
             </Card.Group>
         );

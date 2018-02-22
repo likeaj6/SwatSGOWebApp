@@ -3,12 +3,36 @@ import text from './text'
 import links from './links'
 import { Segment, List, Label, Loader, Header, Message, Image, Popup, Icon, Button, Divider } from 'semantic-ui-react'
 
+const charteringProcessSteps = [
+    {
+        header: '1. Statement of Interest', text: text.CharteringSteps.StepOne, actions: [{link: links.statementOfInterst, content: 'Complete Statement of Interest'}]
+    },
+    {
+        header: '2. Liaison Review', text: text.CharteringSteps.StepTwo,
+        actions: [
+            {link: links.socEmail, content: 'Contact Student Orgs'},
+        ]
+    },
+    {
+        header: '3. Seed Funding (Optional)', text: text.CharteringSteps.StepThree, actions: [{link: links.socFundingForm, content: 'View Funding Form'}]
+    },
+    {
+        header: '4. Draft a Charter', text: text.CharteringSteps.StepFour, actions: [{link: links.sampleCharter, content: 'View Example Charter'}]
+    },
+    {
+        header: '5. Approval!', text: text.CharteringSteps.StepFive, actions: []
+    },
+    {
+        contact: true, header: 'Have Questions?', actions: [{link: links.socEmail, content:'Send us an email!'}]
+    }
+]
 
 class CharteringPanel extends Component {
     constructor(props) {
         super(props);
-        this.state = { isMobile: window.innerWidth <= 760}
+        this.state = { isMobile: window.innerWidth <= 1000, mediumScreen: window.innerWidth <= 1400}
         this.resize = this.resize.bind(this)
+        this.mapStepsToSegment = this.mapStepsToSegment.bind(this)
     }
     componentDidMount() {
         window.addEventListener("resize", this.resize);
@@ -20,7 +44,52 @@ class CharteringPanel extends Component {
     }
 
     resize() {
-        this.setState({isMobile: window.innerWidth <= 760});
+        this.setState({isMobile: window.innerWidth <= 1000, mediumScreen: window.innerWidth <= 1400});
+    }
+
+    mapStepsToSegment(step, index) {
+        const { key, text, actions, header, style } = step
+        const {isMobile, mediumScreen} = this.state
+        // var cardHeight = height == null ? '24rem':height
+        // var cardWidth = width == null ? '15rem':width
+        var buttons = []
+        actions.forEach((action, i) => {
+            if (action.or == true) {
+                buttons.push(                                 <Button.Or />)
+            } else {
+                buttons.push(<Button as='a' fluid key={action.content+i} href={action.link} color='red' content={action.content}/>)
+            }
+        })
+        var buttonSegments = null
+        if (mediumScreen && !isMobile) {
+            buttonSegments = <Button.Group fluid vertical attached='right'>
+                {buttons}
+            </Button.Group>
+        } else {
+            buttonSegments = (<Segment>
+                <Button.Group fluid vertical>
+                    {buttons}
+                </Button.Group>
+            </Segment>)
+        }
+        if (step.contact) {
+            return (
+                <Segment textAlign='center' key={header+index}>
+                    <Header content={header} />
+                    {buttons}
+                </Segment>
+            );
+        }
+        return (
+            <Segment textAlign='center' key={header+index}>
+                <Header content={header} />
+                <Divider/>
+                <Segment.Group horizontal={!isMobile}>
+                    {text != null ? <Segment textAlign='center' content={text}/> : null}
+                    {buttons.length != 0 ? buttonSegments: null}
+                </Segment.Group>
+            </Segment>
+        );
     }
 
     render() {
@@ -29,69 +98,7 @@ class CharteringPanel extends Component {
             <div>
             <Header content='How do I get my club chartered?' textAlign='center' />
                 <Segment.Group attached='top' stackable vertical>
-                    <Segment>
-                        <Header content='1. Statement of Interest' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal={!isMobile}>
-                            <Segment textAlign='center'>
-                                {text.CharteringSteps.StepOne}
-                            </Segment>
-                            <Segment>
-                                <Button fluid color='red' href={links.statementOfInterst} content='Complete Statement of Interest'/>
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment>
-                        <Header content='2. Liaison Review' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal={!isMobile}>
-                            <Segment textAlign='center'>
-                                {text.CharteringSteps.StepTwo}
-                            </Segment>
-                            <Segment>
-                                <Button fluid color='red' href={links.socEmail} content='Contact Student Orgs'/>
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment>
-                        <Header content='3. Seed Funding (Optional)' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal={!isMobile}>
-                            <Segment textAlign='center'>
-                                {text.CharteringSteps.StepThree}
-                            </Segment>
-                            <Segment>
-                                <Button fluid color='red' href={links.socFundingForm} content='View Funding Form'/>
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment>
-                        <Header content='4. Draft a Charter' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal={!isMobile}>
-                            <Segment textAlign='center'>
-                                {text.CharteringSteps.StepFour}
-                            </Segment>
-                            <Segment>
-                                <Button fluid color='red' href={links.sampleCharter} content='View Example Charter'/>
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment>
-                        <Header content='5. Approval' textAlign='center' />
-                        <Divider/>
-                        <Segment.Group horizontal={!isMobile}>
-                            <Segment textAlign='center'>
-                                {text.CharteringSteps.StepFive}
-                            </Segment>
-                        </Segment.Group>
-                    </Segment>
-                    <Segment>
-                        <Header textAlign='center'>
-                            Have Questions?
-                        </Header>
-                        <Button fluid color='red' href={links.socEmail} content='Send us an email!'/>
-                    </Segment>
+                    {charteringProcessSteps.map(this.mapStepsToSegment)}
                 </Segment.Group>
             </div>
         )

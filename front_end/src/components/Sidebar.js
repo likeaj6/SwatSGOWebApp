@@ -15,6 +15,7 @@ const menuItems = [
             // {name: 'news', to: '/news', icon: 'newspaper', content: 'News'},
             {name: 'resources', color:'#F2F6F7', to: '/resources', icon: 'book', content: 'Resources'},
             {name: 'apply', color: '#F2F6F7', to: '/apply', icon: 'wordpress forms', content: 'Apply'},
+            {name: 'sbc', color: '#F2F6F7', to: '/sbc', icon: 'money', content: 'SBC'},
             {name: 'about', color: '#F2F6F7', to: '/about', icon: 'info', content: 'About'}
         ] },
     {key:'calendar', name: 'calendar', color: '#FFFFFF', to: '/calendar', header: true, icon: 'calendar', content: 'Calendar'},

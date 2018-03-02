@@ -3,6 +3,8 @@ var text = {
 
     SGOIntro: 'Student Government Organization has two branches:',
 
+    CurrentInitiatives: ['Matchbox Hours', 'Website Modernization', 'Alcohol Policy', 'PE Credit for Gym Attendance', 'Expanding Campus Transportation', 'Essie’s Hours', 'Student Employment', 'Curriculum Database', 'Pittenger Water Fountains'],
+
     ExecboardDescription:  'The Executive Board meets on a weekly basis to make efficient decisions regarding campus policy and student initiatives.',
 
     SenateDescription: 'The Student Senate meets on a bi-weekly basis as a part of the full SGO to review decisions made by the executive board and to offer support and ideas for SGO initiatives.',

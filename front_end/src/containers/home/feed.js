@@ -5,11 +5,14 @@ import { NavHashLink as NavLink } from 'react-router-hash-link';
 function mapItemsToCards(item, index) {
     const {header, text, action, link, to, shouldScroll} = item
     // const hasLink = true
+    var as = to == null ? 'a':NavLink
+
     return (
         <Segment key={item+index}>
             <Card
                 fluid
-                as={NavLink}
+                as={as}
+                href={link}
                 smooth
                 to={to}
                 raised
@@ -42,6 +45,18 @@ const actionCards = [
         header: 'Chartering a club?',
         to: '/resources/chartering',
         action: 'Get Started',
+        text: '',
+    },
+    {
+        header: 'Current SGO Initiatives',
+        to: '/about/initiatives',
+        action: 'Learn More',
+        text: '',
+    },
+    {
+        header: 'Meeting Minutes',
+        link: 'https://drive.google.com/drive/folders/0B3gNnC3VY4TeZlZaSGZ5bXU5azg?usp=sharing',
+        action: 'View Here',
         text: '',
     },
     {
@@ -85,6 +100,12 @@ const generalCards = [
         header: 'Send us a suggestion!',
         to: '/suggestions/',
         action: 'Take me there!',
+        text: '',
+    },
+    {
+        header: 'Have feedback for the website?',
+        link: 'mailto:jjin3@swarthmore.edu',
+        action: 'Let us know!',
         text: '',
     },
 ]

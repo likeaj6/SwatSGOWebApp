@@ -7,20 +7,33 @@ import { NavLink } from 'react-router-dom'
 
 
 function mapItemsToCards(item, index) {
-    const {header, text, id, key, action, link, to, height} = item
+    const {header, text, id, key, actions, links, to, height} = item
     var as = to == null ? 'a':NavLink
     var cardHeight = height == null ? '17rem':height
+
+    var buttons = []
+    actions.forEach((action, key) => {
+        if (action == 'Or') {
+            buttons.push(<Button.Or/>)
+        } else {
+            buttons.push(<Button as='a' key={action+key} href={links[key]} attached='bottom' color='red' content={action}/>)
+        }
+    })
+    if (actions.length > 1) {
+        buttons = <Button.Group widths={actions.length} buttons={buttons}/>
+    }
+
     return (
         <Segment id={id} key={key+index}>
             <Card
                 className={window.location.hash == '#'+id ? 'shake': ''}
                 fluid
                 as={as}
-                href={link}
+                href={links[0]}
                 to={to}
                 raised
                 color='red'
-                extra={<Button attached='bottom' color='red' content={action}/>}
+                extra={buttons}
                 description={<Card.Description textAlign='center' content={text}/>}
                 header={<Header textAlign='center'>{header}<Divider/></Header>}
             />
@@ -33,21 +46,22 @@ const SBCItems = [
         header: 'Request For Reimbursement/Payment',
         key: 'reimbursement',
         to: '/sbc/reimbursement',
-        action: 'View Process/Form',
+        links: [''],
+        actions: ['View Process/Form'],
         text: text.SBC.Reimbursement,
     },
     {
         header: 'Request Supplementary Funding',
         key: 'supplementary',
-        link: links.supplementaryFunding,
-        action: 'View Funding Request Form',
+        links: [links.supplementaryFunding, '', links.exampleSupplementaryFunding],
+        actions: ['View Funding Proposal Form', 'Or', 'View Example Proposal'],
         text: text.SBC.SupplementalFunding,
     },
     {
         header: 'Authorize Non-Treasurer',
         key: 'authorize',
-        link: links.nonTreasurerAuthorization,
-        action: 'View Authorization Form',
+        links: [links.nonTreasurerAuthorization],
+        actions: ['View Authorization Form'],
         text: text.SBC.NonTreasurerAuthorization,
     },
 ]
@@ -57,32 +71,32 @@ const SBCDocuments = [
         header: 'SEPTA Tickets',
         key: 'septa',
         id: 'septa',
-        link: links.septaTickets,
-        action: 'View Form',
+        links: [links.septaTickets],
+        actions: ['View Form'],
         text: text.SBC.SeptaTickets,
         height: '13rem'
     },
     {
         header: 'SBC Bylaws',
         key: 'bylaws',
-        link: links.byLaws,
-        action: 'View Bylaws',
+        links: [links.byLaws],
+        actions: ['View Bylaws'],
         text: text.SBC.ByLaws,
         height: '13rem'
     },
     {
         header: 'Treasuring 101',
         key: 'treasuring',
-        link: links.treasuring101,
-        action: 'View Document',
+        links: [links.treasuring101],
+        actions: ['View Document'],
         text: text.SBC.Treasuring101,
         height: '13rem'
     },
     {
         header: 'Treasurer Agreement',
         key: 'agreement',
-        link: links.treasurerAgreement,
-        action: 'View Agreement',
+        links: [links.treasurerAgreement],
+        actions: ['View Agreement'],
         text: text.SBC.TreasurerAgreement,
         height: '13rem'
     },
@@ -96,14 +110,19 @@ class SBCTab extends Component {
     constructor(props) {
         super(props);
         this.state = { isMobile: window.innerWidth <= 760}
+        this.resize = this.resize.bind(this)
     }
     componentDidMount() {
-        window.addEventListener("resize", this.resize.bind(this));
+        window.addEventListener("resize", this.resize);
         this.resize();
     }
 
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.resize);
+    }
+
     resize() {
-        this.setState({isMobile: window.innerWidth <= 760});
+        this.setState({isMobile: window.innerWidth <= 1000});
     }
 
     render() {

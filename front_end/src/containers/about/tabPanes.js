@@ -5,6 +5,22 @@ import committees from './committees'
 
 const academic = require('./assets/academic.png');
 
+
+const InitiativesTab = () => {
+    return (<Tab.Pane>
+        <Header size='small' block icon textAlign='center'>
+            <Icon name='idea' circular />
+            Current Initiatives
+        </Header>
+        <br/>
+        <Segment basic textAlign='center'>
+            <List animated size='huge' bulleted color='red' items={text.CurrentInitiatives}/>
+        </Segment>
+        <br/>
+     </Tab.Pane>
+    );
+}
+
 const StructureTab = () => {
     return (
         <Tab.Pane>
@@ -216,5 +232,5 @@ const CommitteesPanel = [
 
 
 export {
-    StructureTab, LegislationTab, CommitteesTab
+    InitiativesTab, StructureTab, LegislationTab, CommitteesTab
 }

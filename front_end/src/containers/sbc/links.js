@@ -21,7 +21,9 @@ var links = {
     clubNumbers:
     'https://drive.google.com/file/d/10yx0eniwp4p6-xGEqGHD8ZUV3M3MpvCz/view?usp=sharing',
     supplementaryFunding:
-    'https://drive.google.com/file/d/1bK7U14nf4GFUFLYbVNAe4IRNlMxTRUGw/view?usp=sharing',
+    'https://drive.google.com/open?id=1NJ3u-jiiOPP8RAC-3H0Jxm5PyB6iocCE',
+    exampleSupplementaryFunding:
+    'https://drive.google.com/open?id=1bK7U14nf4GFUFLYbVNAe4IRNlMxTRUGw',
     nonTreasurerAuthorization:
     'https://docs.google.com/document/d/1HCBl3zbb0TkpmtP9rvLjT-pl-5-9pQyIlH9X0xvSza4/edit?usp=sharing',
     byLaws:

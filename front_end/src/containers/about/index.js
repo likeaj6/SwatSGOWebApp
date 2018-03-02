@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Menu, Loader, Header, Icon, Divider } from 'semantic-ui-react'
-import { StructureTab, LegislationTab, CommitteesTab } from './tabPanes'
+import { StructureTab, LegislationTab, InitiativesTab, CommitteesTab } from './tabPanes'
 import { Route, Redirect } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -9,6 +9,11 @@ import { connect } from 'react-redux'
 
 
 const panes = [
+        {
+        menuItem: <Menu.Item as={NavLink} to='/about/initiatives' key='initiatives' ><Icon name='idea'/>Initiatives</Menu.Item>,
+        pane: <InitiativesTab/>,
+        key: 'initiatives'
+        },
         {
         menuItem: <Menu.Item as={NavLink} to='/about/structure' key='structure' ><Icon name='university'/>Structure</Menu.Item>,
         pane: <StructureTab/>,
